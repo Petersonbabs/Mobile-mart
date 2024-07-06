@@ -2,7 +2,7 @@ import React from 'react'
 
 const CartTotals = () => {
   return (
-    <div className='w-2/5 border'>
+    <div className='border'>
 CartTotals
 CartTotals
     </div>

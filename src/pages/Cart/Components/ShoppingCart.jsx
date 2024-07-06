@@ -32,9 +32,9 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="w-3/5 border border-gray-primary px-4 rounded">
+    <div className=" border border-gray-primary px-4 rounded overflow-auto">
       <p className="py-4">Shopping cart</p>
-      <table className="w-full">
+      <table className="overflow-auto">
         <thead className="bg-gray-100">
           <tr>
             <th className="text-start py-4 bg-gray-primary px-2">PRODUCTS</th>
@@ -52,7 +52,7 @@ const ShoppingCart = () => {
             return (
               <tr key={id} className="py-4 w-full">
 
-                <td className="flex items-center gap-2 py-4 px-2">
+                <td className="flex items-center gap-2 py-4 px-2 flex-wrap">
                   <XCircleIcon className="size-6 stroke-red-primary cursor-pointer text-white-pure" />
                   <div className="w-12">
                     <img src={assests.IphoneHero} alt="" width={"100%"} />
@@ -61,7 +61,7 @@ const ShoppingCart = () => {
                 </td>
 
                 <td>${price.toFixed(2)}</td>
-                
+
                 <td>
                   <div className="flex items-center gap-2">
                     <button
