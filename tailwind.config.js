@@ -13,10 +13,14 @@ export default {
       white: {
         pure: '#fff'
       },
+      gray: {
+        primary: 'rgba(74, 74, 74, 0.1)'
+      }
     },
     extend: {
       width: {
         '95vw': '95vw',
+        '90vw' : '90vw',
         'max': '1200px',
         'fit': 'fit-content'
       },

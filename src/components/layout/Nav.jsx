@@ -6,16 +6,16 @@ const Nav = () => {
   return (
     <div className="nav py-5 border-b-1 border-green">
       {/* nav wrapper */}
-      <nav className="w-95vw m-auto max-w-6xl  flex items-center justify-between">
+      <nav className="w-90vw m-auto max-w-6xl  flex items-center justify-between">
 
         {/* mobile menu button */}
-        <Bars3CenterLeftIcon className="size-4"/>
+        <Bars3CenterLeftIcon className="size-8 hover:text-primary-300 md:hidden"/>
         {/* end of mobile menu button */}
 
         {/* nav logo */}
-        <div className="nav-logo w-28">
+        <Link to={'/'} className="nav-logo w-28 block">
           <img src={assests.Logo} alt="Mobile mart logo" width="100%" />
-        </div>
+        </Link>
         {/* end of nav logo */}
 
         {/* menu itmes */}
@@ -34,7 +34,7 @@ const Nav = () => {
         {/* end of menu items */}
 
         {/* shop: search & cart */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3  ">
           <Link className="bg-primary-300 text-white w-8 h-8 rounded-full flex justify-center items-center">
             <MagnifyingGlassIcon  className="size-4 text-white-pure"/>
           </Link>
