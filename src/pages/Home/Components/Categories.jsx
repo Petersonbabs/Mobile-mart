@@ -12,9 +12,9 @@ const Categories = () => {
       {/* Category wrapper */}
       <div className="w-90vw m-auto">
         {/* text */}
-        <div>
-          <div className="flex items-center justify-between ">
-            <h3 className="text-center md:text-start text-xl font-bold w-full md:w-fit">
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-center md:text-start text-3xl font-bold w-full md:w-fit ">
               Categories
             </h3>
             <Link className="hidden md:inline">View all</Link>
