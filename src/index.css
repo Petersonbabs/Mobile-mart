@@ -16,7 +16,7 @@ body{
     justify-content: center;
 }
 
-.home-link::before {
+.home-link::before, .all::before {
     content: '';
     display: inline-block;
     position: absolute;
@@ -26,4 +26,16 @@ body{
     bottom: 6px;
     margin: auto;
     background-color: var(--primary-green-300);
+}
+
+.all{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.all::before{
+    height: 2px;
+    background-color: #333;
+    bottom: 10px;
 }

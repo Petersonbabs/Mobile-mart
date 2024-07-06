@@ -15,13 +15,15 @@ export default {
       },
       gray: {
         primary: 'rgba(74, 74, 74, 0.1)'
+      },
+      red: {
+        primary : 'red'
       }
     },
     extend: {
       width: {
         '95vw': '95vw',
         '90vw' : '90vw',
-        'max': '1200px',
         'fit': 'fit-content'
       },
       borderWidth: {
@@ -30,6 +32,15 @@ export default {
       borderColor: {
         green: 'var(--primary-green-300)', 
       },
+
+      screens: {
+        'xsm' : '481px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      }
     },
   },
   plugins: [],
