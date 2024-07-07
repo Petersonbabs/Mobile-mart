@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowLeftIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../../../contexts/ProductContext";
+import { assests } from "../../../assets/assets";
 
 const ShoppingCart = ({
   cart,
@@ -10,16 +11,13 @@ const ShoppingCart = ({
   handleDecrement,
   handleQuantityChange,
 }) => {
+  const { loading, deleteCartItem } = useProductContext();
 
-  const {loading, deleteCartItem} = useProductContext()
+  
 
-  if (cart.length < 1) {
-    return <h1>You have nothing in your cart.</h1>;
-  }
-
-  const handleDeleteItem = (id) =>{
-    deleteCartItem(id)
-  }
+  const handleDeleteItem = (id) => {
+    deleteCartItem(id);
+  };
 
   return (
     <div className="border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
@@ -27,7 +25,6 @@ const ShoppingCart = ({
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
           {cart.map((product, index) => {
-            
             const { id, title, price, image } = product;
             const quantity = quantities[id] || 1;
 
@@ -51,8 +48,13 @@ const ShoppingCart = ({
                 </div>
 
                 <div className="flex flex-col items-center gap-2">
-                  <button onClick={()=>{handleDeleteItem(id)}} disabled={loading}>
-                      <TrashIcon className="size-5 stroke-red-primary text-white-pure" />
+                  <button
+                    onClick={() => {
+                      handleDeleteItem(id);
+                    }}
+                    disabled={loading}
+                  >
+                    <TrashIcon className="size-5 stroke-red-primary text-white-pure" />
                   </button>
                   <div className="flex items-center gap-2">
                     <button

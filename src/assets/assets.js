@@ -23,6 +23,7 @@ import Headphone from './Headephone.png'
 import Ps5 from './ps5-contoller.png'
 import Powerbank from './wireless-powerbank.png'
 import SmartWatch from './Smart-watch.png'
+import EmptyCart from './empty-cart.gif'
 
 export const assests = {
     Logo,
@@ -50,4 +51,5 @@ export const assests = {
     Ps5,
     Powerbank,
     SmartWatch,
+    EmptyCart
 }

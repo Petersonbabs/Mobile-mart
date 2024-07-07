@@ -24,7 +24,7 @@ const Nav = () => {
           {["Product", "Store", "Categories"].map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`#categories`}
               className={`px-3 py-2 text-lg font-400 hover:text-primary-300 active:text-primary-300`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
