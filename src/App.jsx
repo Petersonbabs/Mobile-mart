@@ -18,6 +18,7 @@ const App = () => {
           <Route path="/cart" element={<CartPage/>} />
           {/* checkout page */}
           <Route path="/checkout" element={<CheckOutPage />} />
+          {/* <Route path="/success" element={<PaymentSuccessful />} /> */}
 
         </Routes>
         <Footer />

@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <div className="nav py-5 border-b-1 border-green">
       {/* nav wrapper */}
-      <nav className="w-90vw m-auto max-w-6xl  flex items-center justify-between">
+      <nav className="w-90vw m-auto  flex items-center justify-between">
 
         {/* mobile menu button */}
         <Bars3CenterLeftIcon className="size-8 hover:text-primary-300 md:hidden"/>

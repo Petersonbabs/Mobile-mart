@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+import OrderSummary from "./Components/OrderSummary";
+import MakePayment from "./Components/MakePayment";
 
 const CheckOutPage = () => {
   return (
@@ -6,9 +8,16 @@ const CheckOutPage = () => {
       <Helmet>
         <title>MobileMart - CheckOut</title>
       </Helmet>
-      <h1>Checkout</h1>
-    </div>
-  )
-}
 
-export default CheckOutPage
+      <div className="py-8">
+        <div className="w-90vw max-w-6xl m-auto flex flex-col md:flex-row gap-8">
+          <OrderSummary />
+          <MakePayment />
+        </div>
+      </div>
+      
+    </div>
+  );
+};
+
+export default CheckOutPage;

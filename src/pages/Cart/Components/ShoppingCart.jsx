@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowLeftIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { cart } from "../../../data/cart";
 import { assests } from "../../../assets/assets";
@@ -32,37 +32,32 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className=" border border-gray-primary px-4 rounded overflow-auto">
+    <div className=" border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
       <p className="py-4">Shopping cart</p>
-      <table className="overflow-auto">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="text-start py-4 bg-gray-primary px-2">PRODUCTS</th>
-            <th className="text-start py-4 bg-gray-primary px-2">PRICE</th>
-            <th className="text-start py-4 bg-gray-primary px-2">QUANTITY</th>
-            <th className="text-start py-4 bg-gray-primary px-2">SUB-TOTAL</th>
-          </tr>
-        </thead>
-        <tbody className="border-b-1 border-gray-primary">
+      <div className="overflow-auto">
+        <div className="border-b-1 border-gray-primary">
           {cart.map((product) => {
-            const { id, title, image, price } = product;
+            const { id, title, price } = product;
             const quantity = quantities[id];
-            const subTotal = price * quantity;
 
             return (
-              <tr key={id} className="py-4 w-full">
-
-                <td className="flex items-center gap-2 py-4 px-2 flex-wrap">
-                  <XCircleIcon className="size-6 stroke-red-primary cursor-pointer text-white-pure" />
-                  <div className="w-12">
+              <div
+                key={id}
+                className=" w-full  flex justify-between py-2 items-center"
+              >
+                <div className="gap-2 flex items-center flex-wrap">
+                  <div className="w-16 flex items-center gap-4 mb-2">
                     <img src={assests.IphoneHero} alt="" width={"100%"} />
                   </div>
-                  {title}
-                </td>
+                  <div>
+                    <p className="font-bold">{title}</p>
+                    <div>${price.toFixed(2)}</div>
+                    <span>Color: <span style={{color: '#999'}}>{product.color}</span></span>
+                  </div>
+                </div>
 
-                <td>${price.toFixed(2)}</td>
-
-                <td>
+                <div className="flex flex-col items-center gap-2">
+                  <TrashIcon className="size-5 stroke-red-primary text-white-pure"/>
                   <div className="flex items-center gap-2">
                     <button
                       className="px-2 py-1 bg-gray-300 rounded"
@@ -74,9 +69,7 @@ const ShoppingCart = () => {
                       type="number"
                       className="w-12 text-center border rounded"
                       value={quantity}
-                      onChange={(e) =>
-                        handleQuantityChange(id, e.target.value)
-                      }
+                      onChange={(e) => handleQuantityChange(id, e.target.value)}
                       min="1"
                     />
                     <button
@@ -86,13 +79,12 @@ const ShoppingCart = () => {
                       +
                     </button>
                   </div>
-                </td>
-                <td>${subTotal.toFixed(2)}</td>
-              </tr>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
       <Link to={"/"} className="flex gap-4 py-6 w-fit">
         <ArrowLeftIcon className="size-6" />
         Continue Shopping
