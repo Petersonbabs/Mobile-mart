@@ -12,12 +12,12 @@ const Modal = ({ title, message }) => {
       <div className="bg-white-pure p-8 w-90vw max-w-2xl text-center shadow-md rounded-lg flex flex-col items-center justify-center gap-2">
         <ShoppingCartIcon className="stroke-primary-300 text-white-pure size-16 " />
         <h2 className="text-xl font-bold capitalize">{title}</h2>
-        <p className="flex items-center gap-2 flex-wrap justify-center">
+        <div className="flex items-center gap-2 flex-wrap justify-center">
           <span>{message}</span>
-          <div class="spinner-grow bg-primary-300" role="status">
-            <span class="visually-hidden">...</span>
+          <div className="spinner-grow bg-primary-300" role="status">
+            <span className="visually-hidden">...</span>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

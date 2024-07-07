@@ -1,61 +1,44 @@
-import React, { useState } from "react";
-import {
-  ArrowLeftIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import React from "react";
+import { ArrowLeftIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import { assests } from "../../../assets/assets";
+import { useProductContext } from "../../../contexts/ProductContext";
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const ShoppingCart = ({
+  cart,
+  quantities,
+  handleIncrement,
+  handleDecrement,
+  handleQuantityChange,
+}) => {
 
-const ShoppingCart = () => {
-  const [quantities, setQuantities] = useState(
-    cart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
-  );
-
-  const handleIncrement = (id) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: prevQuantities[id] + 1,
-    }));
-  };
-
-  const handleDecrement = (id) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: prevQuantities[id] > 1 ? prevQuantities[id] - 1 : 1,
-    }));
-  };
-
-  const handleQuantityChange = (id, value) => {
-    const newQuantity = Math.max(1, parseInt(value) || 1);
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: newQuantity,
-    }));
-  };
+  const {loading, deleteCartItem} = useProductContext()
 
   if (cart.length < 1) {
     return <h1>You have nothing in your cart.</h1>;
   }
 
+  const handleDeleteItem = (id) =>{
+    deleteCartItem(id)
+  }
+
   return (
-    <div className=" border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
+    <div className="border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
       <p className="py-2">Shopping cart</p>
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
-          {cart.map((product) => {
-            const { id, title, price } = product;
-            const quantity = quantities[id];
+          {cart.map((product, index) => {
+            
+            const { id, title, price, image } = product;
+            const quantity = quantities[id] || 1;
 
             return (
               <div
-                key={id}
-                className=" w-full  flex justify-between py-2 items-center"
+                key={index}
+                className="w-full flex justify-between py-2 items-center"
               >
                 <div className="gap-2 flex items-center flex-wrap">
                   <div className="w-16 flex items-center gap-4 mb-2">
-                    <img src={assests.IphoneHero} alt="" width={"100%"} />
+                    <img src={image} alt="" width={"80%"} />
                   </div>
                   <div>
                     <p className="font-bold">{title}</p>
@@ -68,8 +51,8 @@ const ShoppingCart = () => {
                 </div>
 
                 <div className="flex flex-col items-center gap-2">
-                  <button>
-                    <TrashIcon className="size-5 stroke-red-primary text-white-pure" />
+                  <button onClick={()=>{handleDeleteItem(id)}} disabled={loading}>
+                      <TrashIcon className="size-5 stroke-red-primary text-white-pure" />
                   </button>
                   <div className="flex items-center gap-2">
                     <button
@@ -100,7 +83,7 @@ const ShoppingCart = () => {
       </div>
       <Link
         to={"/"}
-        className="flex gap-4 py-3 bg-primary-300  text-white-pure w-full justify-center hover:bg-primary-400 hover:gap-8"
+        className="flex gap-4 py-3 bg-primary-300 text-white-pure w-full justify-center hover:bg-primary-400 hover:gap-8"
       >
         <ArrowLeftIcon className="size-6" />
         Continue Shopping
