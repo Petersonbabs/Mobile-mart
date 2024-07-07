@@ -15,7 +15,9 @@ const ProductProdiver = ({ children }) => {
   const navigate = useNavigate()
   
   
-  
+  const getCartItems = () =>{
+    cart
+  }
 
   const addToCart = (id) => {
     setLoading(true)

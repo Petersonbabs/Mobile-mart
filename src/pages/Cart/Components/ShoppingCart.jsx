@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { ArrowLeftIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { assests } from "../../../assets/assets";
 
-const cart = JSON.parse(localStorage.getItem('cart'))
+const cart = JSON.parse(localStorage.getItem("cart"));
 
 const ShoppingCart = () => {
   const [quantities, setQuantities] = useState(
@@ -32,8 +35,8 @@ const ShoppingCart = () => {
     }));
   };
 
-  if(cart.length < 1){
-    return <h1>You have nothing in your cart.</h1>
+  if (cart.length < 1) {
+    return <h1>You have nothing in your cart.</h1>;
   }
 
   return (
@@ -57,12 +60,17 @@ const ShoppingCart = () => {
                   <div>
                     <p className="font-bold">{title}</p>
                     <div>${price.toFixed(2)}</div>
-                    <span>Color: <span style={{color: '#999'}}>{product.color}</span></span>
+                    <span>
+                      Color:{" "}
+                      <span style={{ color: "#999" }}>{product.color}</span>
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center gap-2">
-                  <TrashIcon className="size-5 stroke-red-primary text-white-pure"/>
+                  <button>
+                    <TrashIcon className="size-5 stroke-red-primary text-white-pure" />
+                  </button>
                   <div className="flex items-center gap-2">
                     <button
                       className="px-2 py-1 bg-gray-300 rounded"
@@ -90,7 +98,10 @@ const ShoppingCart = () => {
           })}
         </div>
       </div>
-      <Link to={"/"} className="flex gap-4 py-3 w-fit">
+      <Link
+        to={"/"}
+        className="flex gap-4 py-3 bg-primary-300  text-white-pure w-full justify-center hover:bg-primary-400 hover:gap-8"
+      >
         <ArrowLeftIcon className="size-6" />
         Continue Shopping
       </Link>
