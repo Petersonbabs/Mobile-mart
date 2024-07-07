@@ -6,7 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import { assests } from "../../../assets/assets";
 
-const cart = JSON.parse(localStorage.getItem("cart"));
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const ShoppingCart = () => {
   const [quantities, setQuantities] = useState(
