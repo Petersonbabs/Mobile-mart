@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { ArrowLeftIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import { cart } from "../../../data/cart";
 import { assests } from "../../../assets/assets";
+
+const cart = JSON.parse(localStorage.getItem('cart'))
 
 const ShoppingCart = () => {
   const [quantities, setQuantities] = useState(
@@ -31,9 +32,13 @@ const ShoppingCart = () => {
     }));
   };
 
+  if(cart.length < 1){
+    return <h1>You have nothing in your cart.</h1>
+  }
+
   return (
     <div className=" border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
-      <p className="py-4">Shopping cart</p>
+      <p className="py-2">Shopping cart</p>
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
           {cart.map((product) => {
@@ -85,7 +90,7 @@ const ShoppingCart = () => {
           })}
         </div>
       </div>
-      <Link to={"/"} className="flex gap-4 py-6 w-fit">
+      <Link to={"/"} className="flex gap-4 py-3 w-fit">
         <ArrowLeftIcon className="size-6" />
         Continue Shopping
       </Link>

@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const CartTotals = () => {
   return (
@@ -27,10 +28,10 @@ const CartTotals = () => {
           <span>$1440</span>
         </li>
       </ul>
-      <button className='bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-4'>
+      <Link to={'/checkout'} className='bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-4'>
         <span>PROCEED TO CHECKOUT</span>
         <ArrowRightIcon className='size-6'/>
-      </button>
+      </Link>
     </div>
   )
 }

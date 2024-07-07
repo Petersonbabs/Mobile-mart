@@ -1,27 +1,35 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Nav from "./components/layout/Nav";
-import Footer from './components/layout/Footer'
+import Footer from "./components/layout/Footer";
 import LandingPage from "./pages/Home/LandingPage";
 import CartPage from "./pages/Cart/CartPage";
-import CheckOutPage from './pages/Checkout/CheckOutPage'
+import CheckOutPage from "./pages/Checkout/CheckOutPage";
+import PaymentSuccessful from "./pages/Checkout/Components/PaymentSuccessful";
+import ProductProdiver from "./contexts/ProductContext";
+import ScrollToTop from "./components/utils/ScrollToTop";
+
 
 const App = () => {
+
+
   return (
     <>
       <BrowserRouter>
-        <Nav />
-        <Routes>
-          {/* Landing page */}
-          <Route path="/" element={<LandingPage/>} />
-          {/* cart page */}
-          <Route path="/cart" element={<CartPage/>} />
-          {/* checkout page */}
-          <Route path="/checkout" element={<CheckOutPage />} />
-          {/* <Route path="/success" element={<PaymentSuccessful />} /> */}
-
-        </Routes>
-        <Footer />
+        <ProductProdiver>
+          <Nav />
+          <ScrollToTop />
+          <Routes>
+            {/* Landing page */}
+            <Route path="/" element={<LandingPage />} />
+            {/* cart page */}
+            <Route path="/cart" element={<CartPage />} />
+            {/* checkout page */}
+            <Route path="/checkout" element={<CheckOutPage />} />
+            <Route path="/success" element={<PaymentSuccessful />} />
+          </Routes>
+          <Footer />
+        </ProductProdiver>
       </BrowserRouter>
     </>
   );

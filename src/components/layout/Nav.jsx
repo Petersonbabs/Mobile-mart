@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3CenterLeftIcon } from '@her
 
 const Nav = () => {
   return (
-    <div className="nav py-5 border-b-1 border-green">
+    <div className="nav py-3 border-b-1 border-green">
       {/* nav wrapper */}
       <nav className="w-90vw m-auto  flex items-center justify-between">
 

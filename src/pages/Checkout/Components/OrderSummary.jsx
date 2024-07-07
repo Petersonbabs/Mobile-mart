@@ -5,7 +5,7 @@ import { cart } from "../../../data/cart";
 const OrderSummary = () => {
   return (
     <div className="border border-gray-primary px-4 pb-4 rounded w-full md:w-2/4">
-      <p className="py-4 text-lg font-bold">Shopping cart</p>
+      <p className="py-4 text-lg font-bold">Order Summary</p>
       <div>
         {cart.map((product) => {
           const { id, title, price, quantity } = product;
@@ -50,11 +50,11 @@ const OrderSummary = () => {
         </li>
         <li className='flex justify-between  items-center py-6 border-t-1 border-gray-primary'>
           <span>Total</span>
-          <span>$1440</span>
+          <span className="font-bold">$1440</span>
         </li>
       </ul>
 
-      <button className='bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-4 rounded  '>
+      <button className='bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3 rounded  '>
         <span>Continue Shopping</span>
         <ArrowRightIcon className='size-6'/>
       </button>
