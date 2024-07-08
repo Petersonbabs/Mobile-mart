@@ -3,13 +3,14 @@ import { useProductContext } from "../../../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
 
 const MakePayment = ({ total }) => {
-  const { loading, setLoading } = useProductContext();
+  const { loading, setLoading, clearCart  } = useProductContext();
   const navigate = useNavigate();
 
   // handle makepayment
   const handleMakePayment = (e) => {
     e.preventDefault();
     setLoading(true);
+    clearCart()
     setTimeout(() => {
       setLoading(false);
       navigate('/success');

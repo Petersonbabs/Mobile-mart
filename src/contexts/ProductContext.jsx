@@ -58,6 +58,12 @@ const ProductProdiver = ({ children }) => {
     }, 3000);
   };
 
+  const clearCart = ()=>{
+    alert()
+    setCart('')
+    localStorage.clear()
+  }
+
   const deleteCartItem = (id) => {
     setLoading(true);
     console.log(loading);
@@ -83,6 +89,7 @@ const ProductProdiver = ({ children }) => {
     setCart,
     addToCart,
     deleteCartItem,
+    clearCart 
   };
 
   return (
