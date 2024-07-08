@@ -12,7 +12,7 @@ const Hero = () => {
           </button>
           <p className="text-4xl md:text-5xl font-bold leading-normal my-4">
             Explore our store: <br />
-            The <span className="text-primary-300">best deals</span> you can get{" "}
+            The <span className="text-primary-300">best deals</span><br /> you can get
             <br />
             anywhere
           </p>
