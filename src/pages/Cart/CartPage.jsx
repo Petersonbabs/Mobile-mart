@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { products } from "../../data/products";
@@ -12,7 +12,6 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const CartPage = () => {
   const { cart, message, messageTitle } = useProductContext();
-  const [productQuantity, setProductQuantity] = useState()
 
   const [quantities, setQuantities] = useState(
     cart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
@@ -80,7 +79,7 @@ const CartPage = () => {
         </div>
       ) : (
         <div className="border border-gray-primary p-6 rounded overflow-auto w-full flex flex-col items-center justify-center">
-          <h1 className="text-xl">You have nothing in your cart.</h1>;
+          <h1 className="text-xl">You have nothing in your cart.</h1>
           <div className="w-64 h-fit p-0 border">
             <img src={assests.EmptyCart} alt="" width={"100%"} />
           </div>
