@@ -53,23 +53,23 @@ const ProductProdiver = ({ children }) => {
       setLoading(false);
 
       setTimeout(() => {
-        setMessage("");
-        setMessageTitle("");
+        clearMessage()
       }, 5000);
     }, 3000);
   };
 
   const deleteCartItem = (id) => {
+    setLoading(true);
+    console.log(loading);
     const product = cart.find((product) => product.id == id);
     setMessageTitle("Deleting...");
-    setMessage(`${product.title} will be deleted from cart`);
-    setLoading(true);
+    setMessage(`${product.title} is deleting from your cart...`);
     const updatedCart = cart.filter((product) => product.id != id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setTimeout(() => {
-      window.location.reload();
       setLoading(false);
+      window.location.reload();
       setMessage("");
       setMessageTitle("");
     }, 1000 * 3);

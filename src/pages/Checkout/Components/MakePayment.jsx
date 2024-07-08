@@ -2,19 +2,18 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useProductContext } from "../../../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
 
-const MakePayment = () => {
-  const { loading, cart, setLoading } = useProductContext();
-  const navigate = useNavigate()
-
+const MakePayment = ({ total }) => {
+  const { loading, setLoading } = useProductContext();
+  const navigate = useNavigate();
 
   // handle makepayment
   const handleMakePayment = (e) => {
     e.preventDefault();
-    setLoading(true)
-    setTimeout(()=>{
-      setLoading(false)
-      navigate('/success')
-    }, 1000 * 3)
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate('/success');
+    }, 1000 * 3);
   };
 
   return (
@@ -63,7 +62,7 @@ const MakePayment = () => {
               type="text"
               placeholder="123"
               id="cvv"
-              className={`block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300 `}
+              className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
             />
           </div>
         </div>
@@ -77,7 +76,7 @@ const MakePayment = () => {
           />
           <input
             type="text"
-            value={"$1440"}
+            value={`$${total}`}
             readOnly
             id="total"
             className="block rounded-b-sm w-full px-4 py-3 bg-gray-primary outline-none"
@@ -87,14 +86,14 @@ const MakePayment = () => {
         <div className="mt-2">
           <button
             onClick={handleMakePayment}
-            className={`flex w-full gap-4 items-center justify-center bg-primary-300 text-white-pure py-2 px-4 rounded-lg hover:bg-primary-400 hover:gap-8 transition-all`}
+            className={`flex w-full gap-4 items-center justify-center bg-primary-300 text-white-pure py-3 px-4 rounded-lg hover:bg-primary-400 hover:gap-8 transition-all`}
             disabled={loading}
           >
             <span>Pay</span>
             <div>
               {loading ? (
-                <div class="spinner-border size-5 font-thin" role="status">
-                  <span class="visually-hidden">...</span>
+                <div className="spinner-border size-5 font-thin" role="status">
+                  <span className="visually-hidden">...</span>
                 </div>
               ) : (
                 <ArrowRightIcon className="size-4 text-white-pure" />

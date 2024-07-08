@@ -12,20 +12,18 @@ const ShoppingCart = ({
 }) => {
   const { loading, deleteCartItem } = useProductContext();
 
-  
-
   const handleDeleteItem = (id) => {
     deleteCartItem(id);
   };
 
   return (
-    <div className="border border-gray-primary px-4 rounded overflow-auto w-full md:w-3/5">
+    <div className="border border-gray-primary px-4 pb-4 rounded overflow-auto w-full md:w-3/5">
       <p className="py-2">Shopping cart</p>
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
           {cart.map((product, index) => {
-            const { id, title, price, image} = product;
-            
+            const { id, title, price, image } = product;
+
             const quantity = quantities[id];
 
             return (

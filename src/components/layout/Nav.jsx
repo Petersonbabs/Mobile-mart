@@ -44,7 +44,7 @@ const Nav = () => {
 
           <Link to={'/cart'} className="bg-primary-300 text-white min-w-8 min-h-8 rounded-full flex justify-center items-center border-1 relative">
             <ShoppingCartIcon className="size-4 text-white-pure"/>
-            <span className="absolute z-10 text-white-pure flex justify-center items-center rounded-full p-2 text-sm bg-red-primary min-w-1 min-h-1 max-w-6 max-h-6 bottom-3 left-5">{cart.length || 0}</span>
+            <span className="absolute z-10 text-white-pure flex justify-center items-center rounded-full p-2 text-sm bg-red-primary w-8 h-8 max-w-6 max-h-6 bottom-3 left-5">{cart.length || 0}</span>
           </Link>
         </div>
         {/* shop end : search & cart */}

@@ -25,7 +25,6 @@ const CartPage = () => {
   }, [cart]);
 
   const handleIncrement = (id) => {
-    console.log(quantities);
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [id]: prevQuantities[id] + 1,
