@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useProductContext } from "../../../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
+import { assests } from "../../../assets/assets";
 
 const MakePayment = ({ total }) => {
   const { loading, setLoading, clearCart  } = useProductContext();
@@ -36,12 +37,16 @@ const MakePayment = ({ total }) => {
           <label htmlFor="cardNumber" className="block w-full text-md">
             Card Number
           </label>
+          <div>
+
           <input
             type="text"
             placeholder="0000 000 000 000 000"
             id="cardNumber"
             className="block w-full px-4 py-3 bg-gray-primary rounded mt-2 outline-1 outline-primary-300"
-          />
+            />
+            <img src={assests.Airpod} alt="" />
+            </div>
         </div>
         <div className="flex items-start gap-6">
           <div>

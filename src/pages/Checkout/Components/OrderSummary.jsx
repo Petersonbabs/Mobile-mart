@@ -18,7 +18,7 @@ const OrderSummary = ({ setTotal }) => {
   setTotal(total);
 
   return (
-    <div className="border border-gray-primary px-2 pb-4 rounded w-full md:w-2/4 h-fit">
+    <div className="border border-gray-primary px-2 pb-4 rounded w-full md:w-2/4 h-fit hidden md:block">
       <p className="py-4 text-lg px-2 font-bold">Order Summary</p>
       <div>
         {cart.map((product) => {

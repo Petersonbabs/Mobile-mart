@@ -59,7 +59,7 @@ const ProductProdiver = ({ children }) => {
   };
 
   const clearCart = ()=>{
-    alert()
+  
     setCart('')
     localStorage.clear()
   }
