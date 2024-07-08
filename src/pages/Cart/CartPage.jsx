@@ -78,9 +78,9 @@ const CartPage = () => {
           </div>
         </div>
       ) : (
-        <div className="border border-gray-primary p-6 rounded overflow-auto w-full flex flex-col items-center justify-center">
+        <div className=" p-6 rounded overflow-auto w-full flex flex-col items-center justify-center mt-9">
           <h1 className="text-xl">You have nothing in your cart.</h1>
-          <div className="w-64 h-fit p-0 border">
+          <div className="w-44 h-fit p-0">
             <img src={assests.EmptyCart} alt="" width={"100%"} />
           </div>
           <Link to={'/'} className="flex items-center justify-center gap-4 mt-4 bg-primary-300 text-white-pure py-3 w-90vw max-w-xl">
