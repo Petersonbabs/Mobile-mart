@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div className="py-20">
       {/* hero wrapper */}
-      <div className="w-90vw m-auto max-w-6xl flex flex-col md:flex-row md:items-center md:justify-between gap-4 ">
+      <div className="w-90vw m-auto  flex flex-col md:flex-row md:items-center md:justify-between gap-4 ">
         {/* hero left */}
         <div className="md:w-2/4 order-2 md:order-1">
           <button className="text-primary-300 block bg-gray-primary py-2 px-4 rounded-3xl font-bold">
