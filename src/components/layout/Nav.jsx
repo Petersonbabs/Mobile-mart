@@ -37,7 +37,7 @@ const Nav = () => {
         {/* end of nav logo */}
 
         {/* menu items */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-8 items-center">
           <Link
             to={"/"}
             className="px-2 py-1 text-lg hover:text-primary-300 font-bold home-link"

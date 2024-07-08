@@ -23,7 +23,7 @@ body{
     width: 50%;
     height: 5px;
     border-radius: 10px;
-    bottom: 6px;
+    bottom: 2px;
     margin: auto;
     background-color: var(--primary-green-300);
 }
