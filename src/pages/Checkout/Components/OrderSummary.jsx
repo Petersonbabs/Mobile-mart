@@ -5,7 +5,10 @@ const OrderSummary = ({ setTotal }) => {
   const { cart } = useProductContext();
 
   const calculateSubtotal = () => {
-    return cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+    if (Array.isArray(cart) && cart.length > 0) {
+      return cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+    }
+    return 0;
   };
 
   const subtotal = calculateSubtotal();
@@ -21,27 +24,31 @@ const OrderSummary = ({ setTotal }) => {
     <div className="border border-gray-primary px-2 pb-4 rounded w-full md:w-2/4 h-fit hidden md:block">
       <p className="py-4 text-lg px-2 font-bold">Order Summary</p>
       <div>
-        {cart.map((product) => {
-          const { id, title, price, quantity, image } = product;
+        {Array.isArray(cart) && cart.length > 0 ? (
+          cart.map((product) => {
+            const { id, title, price, quantity, image } = product;
 
-          return (
-            <div
-              key={id}
-              className="w-full flex justify-between py-2 items-center"
-            >
-              <div className="gap-2 flex items-center flex-wrap">
-                <div className="w-16 flex items-center gap-4 mb-2 px-2">
-                  <img src={image} alt="" width={"100%"} />
+            return (
+              <div
+                key={id}
+                className="w-full flex justify-between py-2 items-center"
+              >
+                <div className="gap-2 flex items-center flex-wrap">
+                  <div className="w-16 flex items-center gap-4 mb-2 px-2">
+                    <img src={image} alt="" width={"100%"} />
+                  </div>
+                  <p className="min-w-fit">{title}</p>
                 </div>
-                <p className="min-w-fit">{title}</p>
-              </div>
 
-              <div>
-                {quantity} X <span className="text-primary-300">${price}</span>
+                <div>
+                  {quantity} X <span className="text-primary-300">${price}</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <p>No items in cart</p>
+        )}
       </div>
 
       <div className="border border-gray-primary px-2 py-4 rounded">

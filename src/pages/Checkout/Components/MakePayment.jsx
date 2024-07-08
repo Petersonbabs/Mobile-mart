@@ -45,7 +45,6 @@ const MakePayment = ({ total }) => {
             id="cardNumber"
             className="block w-full px-4 py-3 bg-gray-primary rounded mt-2 outline-1 outline-primary-300"
             />
-            <img src={assests.Airpod} alt="" />
             </div>
         </div>
         <div className="flex items-start gap-6">
