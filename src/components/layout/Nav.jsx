@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { assests } from "../../assets/assets";
 import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3CenterLeftIcon } from '@heroicons/react/24/solid';
+import { useProductContext } from "../../contexts/ProductContext";
 
 const Nav = () => {
+  const {cart } = useProductContext()
+
   return (
     <div className="nav py-3 border-b-1 border-green">
       {/* nav wrapper */}
@@ -39,8 +42,9 @@ const Nav = () => {
             <MagnifyingGlassIcon  className="size-4 text-white-pure"/>
           </Link>
 
-          <Link to={'/cart'} className="bg-primary-300 text-white w-8 h-8 rounded-full flex justify-center items-center">
+          <Link to={'/cart'} className="bg-primary-300 text-white min-w-8 min-h-8 rounded-full flex justify-center items-center border-1 relative">
             <ShoppingCartIcon className="size-4 text-white-pure"/>
+            <span className="absolute z-10 text-white-pure flex justify-center items-center rounded-full p-2 text-sm bg-red-primary min-w-1 min-h-1 max-w-6 max-h-6 bottom-3 left-5">{cart.length || 0}</span>
           </Link>
         </div>
         {/* shop end : search & cart */}

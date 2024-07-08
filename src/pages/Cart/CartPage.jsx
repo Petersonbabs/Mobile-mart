@@ -8,10 +8,11 @@ import CartTotals from "./Components/CartTotals";
 import { useProductContext } from "../../contexts/ProductContext";
 import Modal from "../../components/layout/Modal";
 import { assests } from "../../assets/assets";
-import { ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const CartPage = () => {
   const { cart, message, messageTitle } = useProductContext();
+  const [productQuantity, setProductQuantity] = useState()
 
   const [quantities, setQuantities] = useState(
     cart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
@@ -19,11 +20,12 @@ const CartPage = () => {
 
   useEffect(() => {
     setQuantities(
-      cart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
+      cart.reduce((acc, product) => ({ ...acc, [product.id]: product.quantity }), {})
     );
   }, [cart]);
 
   const handleIncrement = (id) => {
+    console.log(quantities);
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [id]: prevQuantities[id] + 1,

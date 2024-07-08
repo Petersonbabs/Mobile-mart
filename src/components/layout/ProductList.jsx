@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useProductContext } from "../../contexts/ProductContext";
+import { useState } from "react";
 
 
 const ProductList = ({ products }) => {
   const {addToCart} = useProductContext()
-  const handleAddToCart = (id) => {
-    addToCart(id)
+  const [quantity, setQuantity] = useState(1)
+  const handleAddToCart = (id, quantity) => {
+    addToCart(id, quantity)
   };
   
   
@@ -25,10 +27,12 @@ const ProductList = ({ products }) => {
             </h3>
             <div>
               <span className="text-lg">${price}</span>
-              {/* todo: increment item */}
+              <div>
+                
+              </div>
             </div>
             <div className="flex gap-2 items-center justify-between flex-wrap mt-4">
-              <button onClick={()=>{handleAddToCart(id)}} className="w-fit min-w-fit flex-1 border-none py-2 px-2 rounded bg-primary-300 hover:bg-primary-400 text-white-pure text-sm">
+              <button onClick={()=>{handleAddToCart(id, quantity)}} className="w-fit min-w-fit flex-1 border-none py-2 px-2 rounded bg-primary-300 hover:bg-primary-400 text-white-pure text-sm">
                 Add to cart
               </button>
               <Link className="w-fit flex-1 min-w-fit py-2 px-2 rounded  border-1 border-green text-sm hover:bg-gray-primary text-center">

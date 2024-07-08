@@ -2,7 +2,6 @@ import React from "react";
 import { ArrowLeftIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../../../contexts/ProductContext";
-import { assests } from "../../../assets/assets";
 
 const ShoppingCart = ({
   cart,
@@ -25,8 +24,9 @@ const ShoppingCart = ({
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
           {cart.map((product, index) => {
-            const { id, title, price, image } = product;
-            const quantity = quantities[id] || 1;
+            const { id, title, price, image} = product;
+            
+            const quantity = quantities[id];
 
             return (
               <div

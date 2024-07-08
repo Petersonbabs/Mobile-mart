@@ -7,7 +7,7 @@ import { useProductContext } from "../../contexts/ProductContext";
 import { useEffect, useState } from "react";
 
 const LandingPage = () => {
-  const { message, messageTitle } = useProductContext();
+  const { message, messageTitle, loading } = useProductContext();
   const [content, setContent] = useState();
   const [title, setTitle] = useState();
 
@@ -15,6 +15,7 @@ const LandingPage = () => {
     if (message) {
       setContent(message);
       setTitle(messageTitle);
+      console.log(message);
     }
   }, [message, messageTitle]);
 
@@ -23,7 +24,7 @@ const LandingPage = () => {
       <Helmet>
         <title>MobileMart - Homepage</title>
       </Helmet>
-      <Modal message={content} title={title}/>
+      <Modal message={content} title={title} loading={loading}/>
       <Hero />
       <Categories />
       {/* <PaginationBar /> */}

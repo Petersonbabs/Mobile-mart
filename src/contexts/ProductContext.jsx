@@ -18,48 +18,61 @@ const ProductProdiver = ({ children }) => {
     getCartItems();
   }, []);
 
+  const clearMessage = () => {
+    setMessage("");
+    setMessageTitle("");
+  };
+
   const getCartItems = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(cart);
   };
 
-  const addToCart = (id) => {
+  const addToCart = (id, quantity) => {
     setLoading(true);
-    try {
-      const product = products.find((product) => product.id == id);
-      const updatedCart = [...cart, product];
-      setCart(updatedCart);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setMessageTitle("Adding to cart!");
-      setMessage(`${product.title} will be added to cart. Redirecting...`);
-      setTimeout(() => {
-        navigate("/cart");
-      }, 1000 * 3);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-      setTimeout(() => {
-        setMessageTitle("");
-        setMessage(``);
-      }, 100 * 3);
+    const product = products.find((product) => product.id == id);
+    const productExist = cart.find((cartItem) => cartItem.id == product.id);
+    
+    let updatedCart;
+    if (!productExist) {
+      product.quantity = quantity;
+      updatedCart = [...cart, product];
+    } else {
+      const remainingCart = cart.filter((cartItem) => cartItem.id !== product.id);
+      productExist.quantity = productExist.quantity + quantity;
+      updatedCart = [...remainingCart, productExist];
     }
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setMessageTitle("Adding to cart!");
+
+    setMessage(`${product.title} will be added to cart...`);
+    setTimeout(() => {
+      setMessageTitle("Successful!");
+      setMessage(`${product.title} has been added to cart.`);
+      setLoading(false);
+
+      setTimeout(() => {
+        setMessage("");
+        setMessageTitle("");
+      }, 5000);
+    }, 3000);
   };
 
   const deleteCartItem = (id) => {
-    const product = cart.find(product => product.id == id)
+    const product = cart.find((product) => product.id == id);
     setMessageTitle("Deleting...");
     setMessage(`${product.title} will be deleted from cart`);
     setLoading(true);
     const updatedCart = cart.filter((product) => product.id != id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setTimeout(()=>{
-      window.location.reload()
-      setLoading(false)
-      setMessage('')
-      setMessageTitle('')
-    }, 1000 * 3)
+    setTimeout(() => {
+      window.location.reload();
+      setLoading(false);
+      setMessage("");
+      setMessageTitle("");
+    }, 1000 * 3);
   };
   const value = {
     message,
@@ -69,7 +82,7 @@ const ProductProdiver = ({ children }) => {
     cart,
     setCart,
     addToCart,
-    deleteCartItem
+    deleteCartItem,
   };
 
   return (

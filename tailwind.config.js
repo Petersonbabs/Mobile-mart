@@ -7,6 +7,7 @@ export default {
   theme: {
     colors :{
       primary: {
+        100: 'var(--primary-green-100)',
         300: 'var(--primary-green-300)',
         400: "var(--primary-green-400)"
       },
