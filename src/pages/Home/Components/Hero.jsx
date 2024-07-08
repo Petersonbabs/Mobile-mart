@@ -10,7 +10,7 @@ const Hero = () => {
           <button className="text-primary-300 block bg-gray-primary py-2 px-4 rounded-3xl font-bold">
             Find your perfect device
           </button>
-          <p className="text-4xl font-bold leading-normal my-4">
+          <p className="text-4xl md:text-5xl font-bold leading-normal my-4">
             Explore our store: <br />
             The <span className="text-primary-300">best deals</span> you can get{" "}
             <br />
