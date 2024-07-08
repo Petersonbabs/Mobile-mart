@@ -46,10 +46,6 @@ const Nav = () => {
 
         {/* shop: search & cart */}
         <div className="flex items-center gap-3  ">
-          <Link className="bg-primary-300 text-white w-8 h-8 rounded-full flex justify-center items-center">
-            <MagnifyingGlassIcon className="size-4 text-white-pure" />
-          </Link>
-
           <Link
             to={"/cart"}
             className="bg-primary-300 text-white min-w-8 min-h-8 rounded-full flex justify-center items-center border-1 relative"
