@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductList from "../../../components/layout/ProductList";
 import PaginationBar from "../../../components/common/PaginationBar"
-import { products } from "../../../data/products";
+// import { products } from "../../../data/products";
+import { useProductContext } from "../../../contexts/ProductContext";
 
 const Categories = () => {
+  const {products, getProducts} = useProductContext()
+  useEffect(()=>{
+    getProducts()
+  }, [products])
+
+  if(!products){
+    return <h1>No product available</h1>
+  }
+
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   
-  // Calculate the indices for slicing the products array
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

@@ -1,6 +1,8 @@
+import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { products } from "../data/products";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const productContext = createContext();
 export const useProductContext = () => {
@@ -14,9 +16,39 @@ const ProductProdiver = ({ children }) => {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
+
+  const token = import.meta.env.VITE_token;
+  const organizationId = import.meta.env.VITE_organizationId
+
   useEffect(() => {
     getCartItems();
   }, []);
+
+  // GET PRODUCTS
+  const getProducts = async () => {
+    // console.log(organizationId);
+    setLoading(true);
+    console.log("fetching...");
+    try {
+      const response = await axios.get(
+        `/app/products?${organizationId}`, {headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }}
+      );
+      
+      const data = response.data
+      if(response.status == 200){
+        console.log(data);
+      }
+
+    } catch (error) {
+      console.log(`Erro occured at getProducts: $`);
+    } finally {
+      setLoading(false);
+      console.log("done!");
+    }
+  };
 
   const clearMessage = () => {
     setMessage("");
@@ -32,13 +64,15 @@ const ProductProdiver = ({ children }) => {
     setLoading(true);
     const product = products.find((product) => product.id == id);
     const productExist = cart.find((cartItem) => cartItem.id == product.id);
-    
+
     let updatedCart;
     if (!productExist) {
       product.quantity = quantity;
       updatedCart = [...cart, product];
     } else {
-      const remainingCart = cart.filter((cartItem) => cartItem.id !== product.id);
+      const remainingCart = cart.filter(
+        (cartItem) => cartItem.id !== product.id
+      );
       productExist.quantity = productExist.quantity + quantity;
       updatedCart = [...remainingCart, productExist];
     }
@@ -53,16 +87,15 @@ const ProductProdiver = ({ children }) => {
       setLoading(false);
 
       setTimeout(() => {
-        clearMessage()
+        clearMessage();
       }, 5000);
     }, 3000);
   };
 
-  const clearCart = ()=>{
-  
-    setCart('')
-    localStorage.clear()
-  }
+  const clearCart = () => {
+    setCart("");
+    localStorage.clear();
+  };
 
   const deleteCartItem = (id) => {
     setLoading(true);
@@ -89,7 +122,8 @@ const ProductProdiver = ({ children }) => {
     setCart,
     addToCart,
     deleteCartItem,
-    clearCart 
+    clearCart,
+    getProducts
   };
 
   return (
