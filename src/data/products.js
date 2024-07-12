@@ -174,7 +174,8 @@ export const products = [
         description: "A stylish Imac air with a variety of health tracking features.",
         reviews: [
             { user: "Grace", rating: 4, comment: "Very useful and looks great on the wrist." },
-            { user: "Hank", rating: 3, comment: "Good features but the screen is a bit small." }
+            { user: "Hank", rating: 3, comment: "Good features but the screen is a bit small." },
+            
         ]
     },
 ];

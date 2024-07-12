@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductList from "../../../components/layout/ProductList";
+import PaginationBar from "../../../components/common/PaginationBar"
 import { products } from "../../../data/products";
 
-
 const Categories = () => {
-  const categoriesProducts = products.slice(0, products.length);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
+  
+  // Calculate the indices for slicing the products array
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div id="categories" className="py-8">
@@ -14,7 +22,7 @@ const Categories = () => {
         {/* text */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-center md:text-start text-3xl font-bold w-full md:w-fit ">
+            <h3 className="text-center md:text-start text-3xl font-bold w-full md:w-fit">
               Categories
             </h3>
             <Link className="hidden md:inline">View all</Link>
@@ -26,7 +34,7 @@ const Categories = () => {
                 return (
                   <span
                     key={index}
-                    className={`p-4 ${category == "All" ? "all" : ""}`}
+                    className={`p-4 ${category === "All" ? "all" : ""}`}
                   >
                     {category}
                   </span>
@@ -38,8 +46,17 @@ const Categories = () => {
         {/* end of text */}
 
         {/* products list */}
-        <ProductList products={categoriesProducts} />
+        <ProductList products={currentProducts} />
         {/* end of products list */}
+
+        {/* Pagination */}
+        <PaginationBar
+          productsPerPage={productsPerPage}
+          totalProducts={products.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+        {/* end of Pagination */}
       </div>
       {/* End of Category wrapper */}
     </div>
