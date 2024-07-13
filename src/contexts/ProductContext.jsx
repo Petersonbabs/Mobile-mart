@@ -30,7 +30,7 @@ const ProductProdiver = ({ children }) => {
   const login = async () => {
     console.log("login in...");
     try {
-      const response = await axios.post(`/api/auth/login`, { email, password });
+      const response = await axios.post(`https://api.timbu.cloud/auth/login`, { email, password });
       const data = response.data;
       if (response.status == 200) {
         setToken(data.access_token);
@@ -51,7 +51,7 @@ const ProductProdiver = ({ children }) => {
 
     try {
       const response = await axios.get(
-        `/api/products?organization_id=${organizationId}`,
+        `https://api.timbu.cloud/products?organization_id=${organizationId}`,
         {
           headers: {
           Authorization: `Bearer ${token}`,
