@@ -3,7 +3,7 @@ import { useProductContext } from "../../contexts/ProductContext";
 import { useState } from "react";
 
 const ProductList = ({ products }) => {
-  const { addToCart } = useProductContext();
+  const { addToCart, loading } = useProductContext();
   const [quantities, setQuantities] = useState({});
 
   const handleAddToCart = (id, quantity) => {
@@ -24,13 +24,21 @@ const ProductList = ({ products }) => {
     const newQuantities = { ...quantities, [id]: Math.max(1, (quantities[id] || 1) - 1) };
     setQuantities(newQuantities);
   };
+  
+  if(loading){
+    return <div class="spinner-grow block mx-auto size-20 bg-primary-300 my-16" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  }
+
+  
 
   return (
     <div className="grid xsm:grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-8">
       {products?.map((product) => {
         const { id, name, photos, current_price } = product;
         const image = photos?.find(item => item.url)
-        const price = current_price[0]?.NGN[0]
+        const price = current_price[0]?.NGN[0].toLocaleString()
         return (
           <div key={id} className="rounded border border-primary-300 p-4">
             <div className="w-full min-h-72 flex justify-center items-center object-contain">
@@ -39,7 +47,7 @@ const ProductList = ({ products }) => {
             <h3 className="text-wrap break-words font-semibold tracking-wide capitalize my-2">
               {name}
             </h3>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap">
               <span className="text-lg">N{price}</span>
               <div className="flex items-center gap-2">
                 <button

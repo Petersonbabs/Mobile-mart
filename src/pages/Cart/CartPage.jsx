@@ -10,8 +10,11 @@ import { assests } from "../../assets/assets";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const CartPage = () => {
-  const { message, messageTitle, products } = useProductContext();
+  const { message, messageTitle, products, token, getProducts } = useProductContext();
   const [cart, setCart] = useState([]);
+  useEffect(()=>{
+    getProducts()
+  }, [token])
 
   useEffect(() => {
     // Fetch cart data from local storage

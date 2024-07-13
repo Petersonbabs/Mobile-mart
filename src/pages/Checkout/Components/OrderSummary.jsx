@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useProductContext } from "../../../contexts/ProductContext";
+import { Link } from "react-router-dom";
 
 const OrderSummary = ({ setTotal }) => {
   const { cart } = useProductContext();
@@ -76,10 +77,10 @@ const OrderSummary = ({ setTotal }) => {
           </li>
         </ul>
 
-        <button className="bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3 rounded">
+        <Link to={'/'} className="bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3 rounded">
           <span>Continue Shopping</span>
           <ArrowRightIcon className="size-6" />
-        </button>
+        </Link>
       </div>
     </div>
   );

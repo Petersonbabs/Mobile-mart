@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProductList from "../../../components/layout/ProductList";
 import PaginationBar from "../../../components/common/PaginationBar"
 
 import { useProductContext } from "../../../contexts/ProductContext";
 
 const Categories = () => {
-  const {products, getProducts} = useProductContext()
+  const {products, getProducts, token} = useProductContext()
   useEffect(()=>{
     getProducts()
-  }, [products])
+  }, [token])
 
   if(!products){
     return <h1>No product available</h1>
@@ -25,6 +25,12 @@ const Categories = () => {
   
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if(!products){
+    return <div class="spinner-grow block mx-auto size-20 bg-primary-300 my-16" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  }
 
   return (
     <div id="categories" className="py-8">

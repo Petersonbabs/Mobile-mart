@@ -1,10 +1,4 @@
-import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-=======
-import { products } from "../data/products";
-import { useNavigate } from "react-router-dom";
->>>>>>> 41c7b0be6a300ea9df62778b8b4e030dbaa752c2
 import axios from "axios";
 
 const productContext = createContext();
@@ -20,17 +14,11 @@ const ProductProdiver = ({ children }) => {
   const [token, setToken] = useState();
   const [products, setProducts] = useState([])
 
-<<<<<<< HEAD
   // const token = import.meta.env.VITE_token;
   const organizationId = import.meta.env.VITE_organizationId;
   const email = import.meta.env.VITE_email;
   const password = import.meta.env.VITE_password;
   
-=======
-
-  const token = import.meta.env.VITE_token;
-  const organizationId = import.meta.env.VITE_organizationId
-
 
   useEffect(() => {
     getCartItems();
@@ -50,20 +38,23 @@ const ProductProdiver = ({ children }) => {
     } catch (error) {
       console.log(`Error occured at login: ${error}`);
     } finally {
-      console.log("done!");
+      console.log("Done: login ");
     }
   };
 
+
   // GET PRODUCTS
   const getProducts = async () => {
+    // console.log(organizationId);
     setLoading(true);
     console.log("fetching products...");
+
     try {
       const response = await axios.get(
         `/api/products?organization_id=${organizationId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -73,34 +64,9 @@ const ProductProdiver = ({ children }) => {
       if (response.status == 200) {
         setProducts(data.items);
       }
+
     } catch (error) {
       console.log(`Erro occured at getProducts: ${error}`);
-    } finally {
-      setLoading(false);
-      console.log("done!");
-    }
-  };
-
-  // GET PRODUCTS
-  const getProducts = async () => {
-    // console.log(organizationId);
-    setLoading(true);
-    console.log("fetching...");
-    try {
-      const response = await axios.get(
-        `/app/products?${organizationId}`, {headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }}
-      );
-      
-      const data = response.data
-      if(response.status == 200){
-        console.log(data);
-      }
-
-    } catch (error) {
-      console.log(`Erro occured at getProducts: $`);
     } finally {
       setLoading(false);
       console.log("done!");
@@ -160,7 +126,7 @@ const ProductProdiver = ({ children }) => {
     console.log(loading);
     const product = cart.find((product) => product.id == id);
     setMessageTitle("Deleting...");
-    setMessage(`${product.title} is deleting from your cart...`);
+    setMessage(`${product.name} is deleting from your cart...`);
     const updatedCart = cart.filter((product) => product.id != id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -181,13 +147,9 @@ const ProductProdiver = ({ children }) => {
     addToCart,
     deleteCartItem,
     clearCart,
-<<<<<<< HEAD
     token,
     products,
     getProducts,
-=======
-    getProducts
->>>>>>> 41c7b0be6a300ea9df62778b8b4e030dbaa752c2
   };
 
   return (
