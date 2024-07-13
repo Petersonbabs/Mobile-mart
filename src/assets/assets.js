@@ -40,17 +40,5 @@ export const assests = {
     speedIcon,
     squareIcon,
     locationIcon,
-    macbook,
-    Iphone,
-    Ipad,
-    ImacAir,
-    OraimoBoombox,
-    Airpod,
-    jblBeatsSpeaker,
-    MiniProjector,
-    Headphone,
-    Ps5,
-    Powerbank,
-    SmartWatch,
     EmptyCart
 }
