@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { products } from "../data/products";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const productContext = createContext();
 export const useProductContext = () => {
@@ -12,11 +11,62 @@ const ProductProdiver = ({ children }) => {
   const [message, setMessage] = useState("");
   const [messageTitle, setMessageTitle] = useState();
   const [cart, setCart] = useState([]);
-  const navigate = useNavigate();
+  const [token, setToken] = useState();
+  const [products, setProducts] = useState([])
 
+  // const token = import.meta.env.VITE_token;
+  const organizationId = import.meta.env.VITE_organizationId;
+  const email = import.meta.env.VITE_email;
+  const password = import.meta.env.VITE_password;
+  
   useEffect(() => {
     getCartItems();
+    login();
   }, []);
+ 
+
+  // LOGIN
+  const login = async () => {
+    console.log("login in...");
+    try {
+      const response = await axios.post(`/api/auth/login`, { email, password });
+      const data = response.data;
+      if (response.status == 200) {
+        setToken(data.access_token);
+      }
+    } catch (error) {
+      console.log(`Error occured at login: ${error}`);
+    } finally {
+      console.log("done!");
+    }
+  };
+
+  // GET PRODUCTS
+  const getProducts = async () => {
+    setLoading(true);
+    console.log("fetching products...");
+    try {
+      const response = await axios.get(
+        `/api/products?organization_id=${organizationId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      
+      const data = response.data;
+      if (response.status == 200) {
+        setProducts(data.items);
+      }
+    } catch (error) {
+      console.log(`Erro occured at getProducts: ${error}`);
+    } finally {
+      setLoading(false);
+      console.log("done!");
+    }
+  };
 
   const clearMessage = () => {
     setMessage("");
@@ -27,18 +77,21 @@ const ProductProdiver = ({ children }) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(cart);
   };
+  
 
   const addToCart = (id, quantity) => {
     setLoading(true);
     const product = products.find((product) => product.id == id);
     const productExist = cart.find((cartItem) => cartItem.id == product.id);
-    
+
     let updatedCart;
     if (!productExist) {
       product.quantity = quantity;
       updatedCart = [...cart, product];
     } else {
-      const remainingCart = cart.filter((cartItem) => cartItem.id !== product.id);
+      const remainingCart = cart.filter(
+        (cartItem) => cartItem.id !== product.id
+      );
       productExist.quantity = productExist.quantity + quantity;
       updatedCart = [...remainingCart, productExist];
     }
@@ -46,23 +99,22 @@ const ProductProdiver = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setMessageTitle("Adding to cart!");
 
-    setMessage(`${product.title} will be added to cart...`);
+    setMessage(`${product.name} will be added to cart...`);
     setTimeout(() => {
       setMessageTitle("Successful!");
-      setMessage(`${product.title} has been added to cart.`);
+      setMessage(`${product.name} has been added to cart.`);
       setLoading(false);
 
       setTimeout(() => {
-        clearMessage()
+        clearMessage();
       }, 5000);
     }, 3000);
   };
 
-  const clearCart = ()=>{
-  
-    setCart('')
-    localStorage.clear()
-  }
+  const clearCart = () => {
+    setCart("");
+    localStorage.clear();
+  };
 
   const deleteCartItem = (id) => {
     setLoading(true);
@@ -89,7 +141,10 @@ const ProductProdiver = ({ children }) => {
     setCart,
     addToCart,
     deleteCartItem,
-    clearCart 
+    clearCart,
+    token,
+    products,
+    getProducts,
   };
 
   return (

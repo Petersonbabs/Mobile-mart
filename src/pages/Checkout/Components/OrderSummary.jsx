@@ -3,18 +3,19 @@ import { useProductContext } from "../../../contexts/ProductContext";
 
 const OrderSummary = ({ setTotal }) => {
   const { cart } = useProductContext();
+  console.log(cart);
 
   const calculateSubtotal = () => {
     if (Array.isArray(cart) && cart.length > 0) {
-      return cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+      return cart.reduce((sum, product) => sum + product.current_price[0].NGN[0] * product.quantity, 0);
     }
     return 0;
   };
 
   const subtotal = calculateSubtotal();
-  const tax = 40; // Example static tax value
-  const shipping = 0; // Example static shipping value
-  const discount = 0; // Example static discount value
+  const tax = 40; 
+  const shipping = 0; 
+  const discount = 0;
   const total = subtotal + tax + shipping - discount;
 
   // Pass total to parent component
@@ -26,8 +27,8 @@ const OrderSummary = ({ setTotal }) => {
       <div>
         {Array.isArray(cart) && cart.length > 0 ? (
           cart.map((product) => {
-            const { id, title, price, quantity, image } = product;
-
+            const { id, title, current_price, quantity, image } = product;
+            const price = current_price[0].NGN[0];
             return (
               <div
                 key={id}
@@ -41,7 +42,7 @@ const OrderSummary = ({ setTotal }) => {
                 </div>
 
                 <div>
-                  {quantity} X <span className="text-primary-300">${price}</span>
+                  {quantity} X <span className="text-primary-300">N{price}</span>
                 </div>
               </div>
             );
@@ -55,11 +56,11 @@ const OrderSummary = ({ setTotal }) => {
         <ul className="space-y-2">
           <li className="flex justify-between items-center">
             <span style={{ color: '#999' }}>Sub-total</span>
-            <span>${subtotal}</span>
+            <span>N{subtotal}</span>
           </li>
           <li className="flex justify-between items-center">
             <span style={{ color: '#999' }}>Shipping</span>
-            <span>{shipping === 0 ? 'Free' : `$${shipping}`}</span>
+            <span>{shipping === 0 ? 'Free' : `NN{shipping}`}</span>
           </li>
           <li className="flex justify-between items-center">
             <span style={{ color: '#999' }}>Discount</span>
@@ -67,11 +68,11 @@ const OrderSummary = ({ setTotal }) => {
           </li>
           <li className="flex justify-between items-center">
             <span style={{ color: '#999' }}>Tax</span>
-            <span>${tax}</span>
+            <span>N{tax}</span>
           </li>
           <li className="flex justify-between items-center py-6 border-t-1 border-gray-primary">
             <span>Total</span>
-            <span className="font-bold">${total}</span>
+            <span className="font-bold">N{total}</span>
           </li>
         </ul>
 

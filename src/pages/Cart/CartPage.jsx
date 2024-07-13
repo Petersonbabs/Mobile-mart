@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { products } from "../../data/products";
 import ProductList from "../../components/layout/ProductList";
 import ShoppingCart from "./Components/ShoppingCart";
 import CartTotals from "./Components/CartTotals";
@@ -11,10 +10,17 @@ import { assests } from "../../assets/assets";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const CartPage = () => {
-  const { cart, message, messageTitle } = useProductContext();
+  const { message, messageTitle, products } = useProductContext();
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    // Fetch cart data from local storage
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
 
   const [quantities, setQuantities] = useState(
-    cart.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
+    cart.reduce((acc, product) => ({ ...acc, [product.id]: product.quantity }), {})
   );
 
   useEffect(() => {
@@ -47,8 +53,7 @@ const CartPage = () => {
 
   const calculateSubtotal = () => {
     return cart
-      .reduce((acc, product) => acc + product.price * quantities[product.id], 0)
-      .toFixed(2);
+      .reduce((acc, product) => acc + product.current_price[0].NGN[0] * quantities[product.id], 0).toLocaleString();
   };
 
   const recentProducts = products.slice(0, 4);

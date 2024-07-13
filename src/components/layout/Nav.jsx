@@ -17,7 +17,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="nav py-3 border-b-1 border-green">
+    <div className="nav py-3 sticky top-0 z-10 bg-white-pure shadow">
       {/* nav wrapper */}
       <nav className="w-90vw m-auto flex items-center justify-between">
         {/* mobile menu button */}

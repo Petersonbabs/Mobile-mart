@@ -15,6 +15,7 @@ const ShoppingCart = ({
   const handleDeleteItem = (id) => {
     deleteCartItem(id);
   };
+  
 
   return (
     <div className="border border-gray-primary px-4 pb-4 rounded overflow-auto w-full md:w-3/5">
@@ -22,7 +23,10 @@ const ShoppingCart = ({
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
           {cart.map((product, index) => {
-            const { id, title, price, image } = product;
+            const { id, title, current_price, photos } = product;
+            const image = photos?.find((item) => item.url);
+            const price = current_price[0].NGN[0].toLocaleString()
+            
 
             const quantity = quantities[id];
 
@@ -33,11 +37,15 @@ const ShoppingCart = ({
               >
                 <div className="gap-2 flex items-center flex-wrap">
                   <div className="w-16 flex items-center gap-4 mb-2">
-                    <img src={image} alt="" width={"80%"} />
+                    <img
+                      src={`https://api.timbu.cloud/images/${image.url}`}
+                      alt=""
+                      width={"80%"}
+                    />
                   </div>
                   <div>
                     <p className="font-bold">{title}</p>
-                    <div>${price.toFixed(2)}</div>
+                    <div>N{price}</div>
                     <span>
                       Color:{" "}
                       <span style={{ color: "#999" }}>{product.color}</span>
