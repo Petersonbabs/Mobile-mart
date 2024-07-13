@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductList from "../../../components/layout/ProductList";
 import PaginationBar from "../../../components/common/PaginationBar"
+
 import { useProductContext } from "../../../contexts/ProductContext";
 
 const Categories = () => {
-  const {products, getProducts, token} = useProductContext()
+  const {products, getProducts} = useProductContext()
   useEffect(()=>{
     getProducts()
-  }, [ token])
+  }, [products])
 
   if(!products){
     return <h1>No product available</h1>

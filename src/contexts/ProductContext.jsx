@@ -1,4 +1,10 @@
+import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+import { products } from "../data/products";
+import { useNavigate } from "react-router-dom";
+>>>>>>> 41c7b0be6a300ea9df62778b8b4e030dbaa752c2
 import axios from "axios";
 
 const productContext = createContext();
@@ -14,11 +20,18 @@ const ProductProdiver = ({ children }) => {
   const [token, setToken] = useState();
   const [products, setProducts] = useState([])
 
+<<<<<<< HEAD
   // const token = import.meta.env.VITE_token;
   const organizationId = import.meta.env.VITE_organizationId;
   const email = import.meta.env.VITE_email;
   const password = import.meta.env.VITE_password;
   
+=======
+
+  const token = import.meta.env.VITE_token;
+  const organizationId = import.meta.env.VITE_organizationId
+
+
   useEffect(() => {
     getCartItems();
     login();
@@ -62,6 +75,32 @@ const ProductProdiver = ({ children }) => {
       }
     } catch (error) {
       console.log(`Erro occured at getProducts: ${error}`);
+    } finally {
+      setLoading(false);
+      console.log("done!");
+    }
+  };
+
+  // GET PRODUCTS
+  const getProducts = async () => {
+    // console.log(organizationId);
+    setLoading(true);
+    console.log("fetching...");
+    try {
+      const response = await axios.get(
+        `/app/products?${organizationId}`, {headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }}
+      );
+      
+      const data = response.data
+      if(response.status == 200){
+        console.log(data);
+      }
+
+    } catch (error) {
+      console.log(`Erro occured at getProducts: $`);
     } finally {
       setLoading(false);
       console.log("done!");
@@ -142,9 +181,13 @@ const ProductProdiver = ({ children }) => {
     addToCart,
     deleteCartItem,
     clearCart,
+<<<<<<< HEAD
     token,
     products,
     getProducts,
+=======
+    getProducts
+>>>>>>> 41c7b0be6a300ea9df62778b8b4e030dbaa752c2
   };
 
   return (
