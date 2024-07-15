@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 import { useProductContext } from "../../contexts/ProductContext";
 import ProductList from "../../components/layout/ProductList";
-import { TruckIcon, ArrowPathIcon } from '@heroicons/react/24/solid'
+import { TruckIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
+import Modal from "../../components/layout/Modal";
 
 const SingleProductPage = () => {
   const {
@@ -14,10 +15,22 @@ const SingleProductPage = () => {
     getProducts,
     loading,
     addToCart,
+    message,
+    messageTitle,
+    loadingCart,
   } = useProductContext();
   const [quantities, setQuantities] = useState({});
   const { id } = useParams();
   const [productImg, setProductImg] = useState("");
+  const [content, setContent] = useState();
+  const [title, setTitle] = useState();
+
+  useEffect(() => {
+    if (message) {
+      setContent(message);
+      setTitle(messageTitle);
+    }
+  }, [message, messageTitle]);
 
   useEffect(() => {
     getSingleProduct(id);
@@ -72,6 +85,7 @@ const SingleProductPage = () => {
       <Helmet>
         <title>MobileMart - Product</title>
       </Helmet>
+      <Modal message={content} title={title} loading={loadingCart} />
 
       {/*   PRODUCT DEATAILS */}
       <div className="w-95vw max-w-6xl mx-auto md:flex my-16 gap-12 md:items-center">
@@ -150,7 +164,7 @@ const SingleProductPage = () => {
               </div>
             </div>
             <div className="flex gap-4 p-3 border">
-            <ArrowPathIcon className="size-8 text-primary-300" />
+              <ArrowPathIcon className="size-8 text-primary-300" />
               <div>
                 <h2>Return Delivery</h2>
                 <p>Free 30 Days Delivery Returns. Details</p>

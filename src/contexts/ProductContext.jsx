@@ -32,7 +32,7 @@ const ProductProdiver = ({ children }) => {
   const login = async () => {
     console.log("login in...");
     try {
-      const response = await axios.post(`/api/auth/login`, {
+      const response = await axios.post(`${apiUrl}/auth/login`, {
         email,
         password,
       });
@@ -55,7 +55,7 @@ const ProductProdiver = ({ children }) => {
 
     try {
       const response = await axios.get(
-        `/api/products?organization_id=${organizationId}`,
+        `${apiUrl}/products?organization_id=${organizationId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +80,7 @@ const ProductProdiver = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `/api/products/${id}?organization_id=${organizationId}`,
+        `${apiUrl}/products/${id}?organization_id=${organizationId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
