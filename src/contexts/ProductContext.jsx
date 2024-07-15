@@ -8,29 +8,34 @@ export const useProductContext = () => {
 
 const ProductProdiver = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [loadingCart, setLoadingCart] = useState(false);
   const [message, setMessage] = useState("");
   const [messageTitle, setMessageTitle] = useState();
   const [cart, setCart] = useState([]);
   const [token, setToken] = useState();
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const [singleProduct, setSinglProduct] = useState({})
 
   // const token = import.meta.env.VITE_token;
   const organizationId = import.meta.env.VITE_organizationId;
   const email = import.meta.env.VITE_email;
   const password = import.meta.env.VITE_password;
-  
+  const apiUrl = import.meta.env.VITE_apiUrl;
 
   useEffect(() => {
     getCartItems();
     login();
+    
   }, []);
- 
 
   // LOGIN
   const login = async () => {
     console.log("login in...");
     try {
-      const response = await axios.post(`https://api.timbu.cloud/auth/login`, { email, password });
+      const response = await axios.post(`/api/auth/login`, {
+        email,
+        password,
+      });
       const data = response.data;
       if (response.status == 200) {
         setToken(data.access_token);
@@ -42,7 +47,6 @@ const ProductProdiver = ({ children }) => {
     }
   };
 
-
   // GET PRODUCTS
   const getProducts = async () => {
     // console.log(organizationId);
@@ -51,10 +55,35 @@ const ProductProdiver = ({ children }) => {
 
     try {
       const response = await axios.get(
-        `https://api.timbu.cloud/products?organization_id=${organizationId}`,
+        `/api/products?organization_id=${organizationId}`,
         {
           headers: {
-          Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = response.data;
+      if (response.status == 200) {
+        setProducts(data.items);
+      }
+    } catch (error) {
+      console.log(`Erro occured at getProducts: ${error}`);
+    } finally {
+      setLoading(false);
+      console.log("done!");
+    }
+  };
+
+  const getSingleProduct = async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `/api/products/${id}?organization_id=${organizationId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -62,14 +91,13 @@ const ProductProdiver = ({ children }) => {
       
       const data = response.data;
       if (response.status == 200) {
-        setProducts(data.items);
+        setSinglProduct(data);
+        console.log(data);
       }
-
     } catch (error) {
-      console.log(`Erro occured at getProducts: ${error}`);
+      console.log(error);
     } finally {
       setLoading(false);
-      console.log("done!");
     }
   };
 
@@ -82,10 +110,9 @@ const ProductProdiver = ({ children }) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(cart);
   };
-  
 
   const addToCart = (id, quantity) => {
-    setLoading(true);
+    setLoadingCart(true);
     const product = products.find((product) => product.id == id);
     const productExist = cart.find((cartItem) => cartItem.id == product.id);
 
@@ -108,7 +135,7 @@ const ProductProdiver = ({ children }) => {
     setTimeout(() => {
       setMessageTitle("Successful!");
       setMessage(`${product.name} has been added to cart.`);
-      setLoading(false);
+      setLoadingCart(false);
 
       setTimeout(() => {
         clearMessage();
@@ -123,7 +150,6 @@ const ProductProdiver = ({ children }) => {
 
   const deleteCartItem = (id) => {
     setLoading(true);
-    console.log(loading);
     const product = cart.find((product) => product.id == id);
     setMessageTitle("Deleting...");
     setMessage(`${product.name} is deleting from your cart...`);
@@ -142,6 +168,7 @@ const ProductProdiver = ({ children }) => {
     messageTitle,
     loading,
     setLoading,
+    loadingCart,
     cart,
     setCart,
     addToCart,
@@ -150,6 +177,8 @@ const ProductProdiver = ({ children }) => {
     token,
     products,
     getProducts,
+    getSingleProduct,
+    singleProduct
   };
 
   return (

@@ -79,7 +79,7 @@ const ProductList = ({ products }) => {
                 Add to cart
               </button>
               <Link
-                to={``}
+                to={`/product/${id}`}
                 className="w-fit flex-1 min-w-fit py-2 px-2 rounded border-1 border-green text-sm hover:bg-gray-primary text-center"
               >
                 View Details

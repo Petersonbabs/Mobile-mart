@@ -10,7 +10,7 @@ import { assests } from "../../assets/assets";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const CartPage = () => {
-  const { message, messageTitle, products, token, getProducts } = useProductContext();
+  const { message, messageTitle, products, token, getProducts, loadingCart } = useProductContext();
   const [cart, setCart] = useState([]);
   useEffect(()=>{
     getProducts()
@@ -67,7 +67,7 @@ const CartPage = () => {
       <Helmet>
         <title>MobileMart - Cart</title>
       </Helmet>
-      <Modal message={message} title={messageTitle} />
+      <Modal message={message} title={messageTitle} loading={loadingCart}/>
       {cart.length > 0 ? (
         <div className="py-8">
           <div className="w-90vw max-w-6xl m-auto flex flex-col md:flex-row gap-8">

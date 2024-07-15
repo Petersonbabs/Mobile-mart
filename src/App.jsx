@@ -8,6 +8,7 @@ import CheckOutPage from "./pages/Checkout/CheckOutPage";
 import PaymentSuccessful from "./pages/Checkout/Components/PaymentSuccessful";
 import ProductProdiver from "./contexts/ProductContext";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import SingleProductPage from "./pages/SingleProduct/SingleProductPage";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Routes>
             {/* Landing page */}
             <Route path="/" element={<LandingPage />} />
+            <Route path="/product/:id" element={<SingleProductPage />} />
             {/* cart page */}
             <Route path="/cart" element={<CartPage />} />
             {/* checkout page */}
