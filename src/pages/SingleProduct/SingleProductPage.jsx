@@ -19,7 +19,7 @@ const SingleProductPage = () => {
     messageTitle,
     loadingCart,
   } = useProductContext();
-  const [price, setPrice] = useState()
+  const [price, setPrice] = useState('')
   const [quantities, setQuantities] = useState({});
   const { id } = useParams();
   const [productImg, setProductImg] = useState("");
@@ -43,7 +43,7 @@ const SingleProductPage = () => {
     if (singleProduct) {
       const image = singleProduct?.photos || "";
       setProductImg(image);
-      setPrice(singleProduct.current_price.toLocaleString())
+      // setPrice(singleProduct?.current_price.tolocaleString())
     }
   }, [singleProduct]);
 
@@ -108,7 +108,7 @@ const SingleProductPage = () => {
         {/* details */}
         <div>
           <h2 className="text-3xl my-8">{singleProduct?.name}</h2>
-          <p className="font-bold">N{price}</p>
+          <p className="font-bold">N{singleProduct?.current_price}</p>
           <p>{singleProduct?.description}</p>
           <div className="flex items-center my-4 flex-wrap gap-2">
             <div className="flex items-center gap-2 border rounded">
