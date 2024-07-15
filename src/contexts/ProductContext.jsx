@@ -14,7 +14,7 @@ const ProductProdiver = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [token, setToken] = useState();
   const [products, setProducts] = useState([]);
-  const [singleProduct, setSinglProduct] = useState({})
+  const [singleProduct, setSinglProduct] = useState({});
 
   // const token = import.meta.env.VITE_token;
   const organizationId = import.meta.env.VITE_organizationId;
@@ -25,7 +25,6 @@ const ProductProdiver = ({ children }) => {
   useEffect(() => {
     getCartItems();
     login();
-    
   }, []);
 
   // LOGIN
@@ -88,7 +87,7 @@ const ProductProdiver = ({ children }) => {
           },
         }
       );
-      
+
       const data = response.data;
       if (response.status == 200) {
         setSinglProduct(data);
@@ -178,7 +177,7 @@ const ProductProdiver = ({ children }) => {
     products,
     getProducts,
     getSingleProduct,
-    singleProduct
+    singleProduct,
   };
 
   return (
