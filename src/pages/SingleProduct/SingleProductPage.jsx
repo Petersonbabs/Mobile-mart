@@ -88,7 +88,7 @@ const SingleProductPage = () => {
       <Modal message={content} title={title} loading={loadingCart} />
 
       {/*   PRODUCT DEATAILS */}
-      <div className="w-95vw max-w-6xl mx-auto md:flex my-16 gap-12 md:items-center">
+      <div className="w-90vw max-w-6xl mx-auto md:flex my-16 gap-12 md:items-center">
         <div className="w-full md:w-3/5">
           <img
             src={

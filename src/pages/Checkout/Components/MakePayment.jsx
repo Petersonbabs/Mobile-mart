@@ -1,17 +1,18 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useProductContext } from "../../../contexts/ProductContext";
 import { useNavigate } from "react-router-dom";
-import { assests } from "../../../assets/assets";
+import { useForm } from "react-hook-form";
+
 
 const MakePayment = ({ total }) => {
-  const { loading, setLoading, clearCart  } = useProductContext();
+  const { loading, setLoading, clearCart } = useProductContext();
   const navigate = useNavigate();
 
-  // handle makepayment
-  const handleMakePayment = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const handleMakePayment = (data) => {
     setLoading(true);
-    clearCart()
+    clearCart();
     setTimeout(() => {
       setLoading(false);
       navigate('/success');
@@ -21,7 +22,7 @@ const MakePayment = ({ total }) => {
   return (
     <div className="border border-gray-primary py-2 px-4 rounded overflow-auto w-full md:w-2/4 h-fit">
       <p className="py-4 mt-3 text-lg font-bold">Make Payment</p>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit(handleMakePayment)}>
         <div>
           <label htmlFor="cardName" className="block w-full text-md">
             Cardholder Name
@@ -30,22 +31,29 @@ const MakePayment = ({ total }) => {
             type="text"
             placeholder="Enter Card Name"
             id="cardName"
+            {...register('cardName', { required: "Cardholder name is required" })}
             className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
           />
+          {errors.cardName && <p className="text-red-600">{errors.cardName.message}</p>}
         </div>
         <div>
           <label htmlFor="cardNumber" className="block w-full text-md">
             Card Number
           </label>
-          <div>
-
           <input
             type="text"
             placeholder="0000 000 000 000 000"
             id="cardNumber"
+            {...register('cardNumber', {
+              required: "Card number is required",
+              pattern: {
+                value: /^\d{16}$/,
+                message: "Card number must be 16 digits"
+              }
+            })}
             className="block w-full px-4 py-3 bg-gray-primary rounded mt-2 outline-1 outline-primary-300"
-            />
-            </div>
+          />
+          {errors.cardNumber && <p className="text-red-600">{errors.cardNumber.message}</p>}
         </div>
         <div className="flex items-start gap-6">
           <div>
@@ -56,8 +64,16 @@ const MakePayment = ({ total }) => {
               type="text"
               placeholder="MM/YY"
               id="expiryDate"
+              {...register('expiryDate', {
+                required: "Expiry date is required",
+                pattern: {
+                  value: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
+                  message: "Invalid expiry date format"
+                }
+              })}
               className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
             />
+            {errors.expiryDate && <p className="text-red-600">{errors.expiryDate.message}</p>}
           </div>
           <div>
             <label htmlFor="cvv" className="block w-full text-md">
@@ -67,8 +83,16 @@ const MakePayment = ({ total }) => {
               type="text"
               placeholder="123"
               id="cvv"
+              {...register('cvv', {
+                required: "CVV is required",
+                pattern: {
+                  value: /^[0-9]{3,4}$/,
+                  message: "Invalid CVV"
+                }
+              })}
               className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
             />
+            {errors.cvv && <p className="text-red-600">{errors.cvv.message}</p>}
           </div>
         </div>
         <div>
@@ -90,7 +114,7 @@ const MakePayment = ({ total }) => {
 
         <div className="mt-2">
           <button
-            onClick={handleMakePayment}
+            type="submit"
             className={`flex w-full gap-4 items-center justify-center bg-primary-300 text-white-pure py-3 px-4 rounded-lg hover:bg-primary-400 hover:gap-8 transition-all`}
             disabled={loading}
           >
