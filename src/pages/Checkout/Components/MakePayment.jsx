@@ -32,9 +32,9 @@ const MakePayment = ({ total }) => {
             placeholder="Enter Card Name"
             id="cardName"
             {...register('cardName', { required: "Cardholder name is required" })}
-            className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
+            className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300 "
           />
-          {errors.cardName && <p className="text-red-600">{errors.cardName.message}</p>}
+          {errors.cardName && <p className="text-red-primary">{errors.cardName.message}</p>}
         </div>
         <div>
           <label htmlFor="cardNumber" className="block w-full text-md">
@@ -53,7 +53,7 @@ const MakePayment = ({ total }) => {
             })}
             className="block w-full px-4 py-3 bg-gray-primary rounded mt-2 outline-1 outline-primary-300"
           />
-          {errors.cardNumber && <p className="text-red-600">{errors.cardNumber.message}</p>}
+          {errors.cardNumber && <p className="text-red-primary">{errors.cardNumber.message}</p>}
         </div>
         <div className="flex items-start gap-6">
           <div>
@@ -73,7 +73,7 @@ const MakePayment = ({ total }) => {
               })}
               className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
             />
-            {errors.expiryDate && <p className="text-red-600">{errors.expiryDate.message}</p>}
+            {errors.expiryDate && <p className="text-red-primary">{errors.expiryDate.message}</p>}
           </div>
           <div>
             <label htmlFor="cvv" className="block w-full text-md">
@@ -92,7 +92,7 @@ const MakePayment = ({ total }) => {
               })}
               className="block w-full px-4 py-3 bg-gray-primary rounded-lg mt-2 outline-1 outline-primary-300"
             />
-            {errors.cvv && <p className="text-red-600">{errors.cvv.message}</p>}
+            {errors.cvv && <p className="text-red-primary">{errors.cvv.message}</p>}
           </div>
         </div>
         <div>
