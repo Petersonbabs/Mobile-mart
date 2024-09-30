@@ -1,3 +1,16 @@
+import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import ProductList from "../../components/layout/ProductList";
+import ShoppingCart from "./Components/ShoppingCart";
+import CartTotals from "./Components/CartTotals";
+import { useProductContext } from "../../contexts/ProductContext";
+import Modal from "../../components/layout/Modal";
+import { assests } from "../../assets/assets";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+
+import { useProductContext } from "../../contexts/ProductContext";
+
 const CartPage = () => {
   const { message, messageTitle, products, token, getProducts, loadingCart } = useProductContext();
   const [cart, setCart] = useState([]);
