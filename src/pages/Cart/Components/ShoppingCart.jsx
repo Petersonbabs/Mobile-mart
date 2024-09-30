@@ -22,7 +22,7 @@ const ShoppingCart = ({
       <p className="py-2">Shopping cart</p>
       <div className="overflow-auto">
         <div className="border-b-1 border-gray-primary">
-          {cart.map((product, index) => {
+          {cart?.map((product, index) => {
             const { id, title, images, price} = product;
             
 

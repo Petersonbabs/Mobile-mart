@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 
 const CartTotals = ({ cart, quantities, subtotal }) => {
-  const tax = (parseFloat(subtotal.replace(/,/g, '')) * 0.08).toLocaleString(); // tax calculation (8%)
-  const total = (parseFloat(subtotal.replace(/,/g, '')) + parseFloat(tax.replace(/,/g, ''))).toLocaleString();
+  const tax = (parseFloat(subtotal.toLocaleString().replace(/,/g, '')) * 0.08).toLocaleString(); // tax calculation (8%)
+  const total = (parseFloat(subtotal.toLocaleString().replace(/,/g, '')) + parseFloat(tax.replace(/,/g, ''))).toLocaleString();
 
   return (
     <div className='border border-gray-primary px-4 rounded overflow-auto w-full md:w-2/5 py-3'>
@@ -13,7 +13,7 @@ const CartTotals = ({ cart, quantities, subtotal }) => {
       <ul className='space-y-6'>
         <li className='flex justify-between items-center'>
           <span style={{ color: '#999' }}>Sub-total({cart.length})</span>
-          <span>N{subtotal}</span>
+          <span>N{subtotal.toLocaleString()}</span>
         </li>
         <li className='flex justify-between items-center'>
           <span style={{ color: '#999' }}>Shipping</span>
