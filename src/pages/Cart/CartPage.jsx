@@ -60,8 +60,8 @@ const CartPage = () => {
   };
 
   // Ensure products exist before slicing
-  const recentProducts = products?.length > 0 ? products.slice(0, 4) : [];
-  const recommendedProducts = products?.length > 5 ? products.slice(5, 9) : [];
+  const recentProducts = products?.length > 0 ? products?.slice(0, 4) : [];
+  const recommendedProducts = products?.length > 5 ? products?.slice(5, 9) : [];
 
   return (
     <div>
