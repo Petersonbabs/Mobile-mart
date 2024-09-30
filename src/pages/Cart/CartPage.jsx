@@ -100,7 +100,7 @@ const CartPage = () => {
       )}
 
       {/* Recently viewed */}
-      {recentProducts.length > 0 && (
+      {recentProducts?.length > 0 && (
         <div className="py-8">
           <div className="w-90vw m-auto max-w-6xl">
             <div className="flex items-center justify-between mb-8">
@@ -113,7 +113,7 @@ const CartPage = () => {
       )}
 
       {/* Recommended products */}
-      {recommendedProducts.length > 0 && (
+      {recommendedProducts?.length > 0 && (
         <div className="mt-8">
           <div className="w-90vw m-auto max-w-6xl">
             <div className="flex items-center justify-between mb-8">
