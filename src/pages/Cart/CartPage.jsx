@@ -60,8 +60,8 @@ const CartPage = () => {
   };
 
   // Ensure products exist before slicing
-  const recentProducts = products?.length > 0 ? products?.slice(0, 4) : [];
-  const recommendedProducts = products?.length > 5 ? products?.slice(5, 9) : [];
+  // const recentProducts = products?.length > 0 ? products?.slice(0, 4) : [];
+  // const recommendedProducts = products?.length > 5 ? products?.slice(5, 9) : [];
 
   return (
     <div>
@@ -100,7 +100,7 @@ const CartPage = () => {
       )}
 
       {/* Recently viewed */}
-      {recentProducts?.length > 0 && (
+      {/* {recentProducts?.length > 0 && (
         <div className="py-8">
           <div className="w-90vw m-auto max-w-6xl">
             <div className="flex items-center justify-between mb-8">
@@ -110,10 +110,10 @@ const CartPage = () => {
             <ProductList products={recentProducts} />
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Recommended products */}
-      {recommendedProducts?.length > 0 && (
+      {/* {recommendedProducts?.length > 0 && (
         <div className="mt-8">
           <div className="w-90vw m-auto max-w-6xl">
             <div className="flex items-center justify-between mb-8">
@@ -123,8 +123,8 @@ const CartPage = () => {
             <ProductList products={recommendedProducts} />
           </div>
         </div>
-      )}
-    </div>
+      )} */}
+    </div> 
   );
 };
 
