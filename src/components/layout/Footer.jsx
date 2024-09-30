@@ -58,11 +58,11 @@ const Footer = () => {
       </div>
       {/* end of wrapper */}
        {/* about */}
-       <div className="px-8 mb-8">
+       <div className="px-8 my-8">
           <div className="w-32">
             <img src={assests.Logo} alt="" width={"100%"} />
           </div>
-          <p className="text-gray-primary">
+          <p className="text-gray-50">
             © 2020 Mobile Mart. All rights reserved.
           </p>
         </div>
