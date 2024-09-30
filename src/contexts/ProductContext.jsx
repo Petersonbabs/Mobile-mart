@@ -66,6 +66,7 @@ const ProductProdiver = ({ children }) => {
       const data = response.data;
       console.log(data.products[0].images[0])
       if (response.status == 200) {
+        setMessageTitle('Product')
         setProducts(data.products);
       }
     } catch (error) {
@@ -131,10 +132,10 @@ const ProductProdiver = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setMessageTitle("Adding to cart!");
 
-    setMessage(`${product.name} will be added to cart...`);
+    setMessage(`Adding ${product.title} to cart...`);
     setTimeout(() => {
       setMessageTitle("Successful!");
-      setMessage(`${product.name} has been added to cart.`);
+      setMessage(`${product.title} has been added to cart.`);
       setLoadingCart(false);
 
       setTimeout(() => {

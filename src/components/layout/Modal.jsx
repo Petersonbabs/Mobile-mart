@@ -17,7 +17,7 @@ const Modal = ({ title, message, loading }) => {
       <div className="bg-white-pure p-8 w-90vw max-w-2xl relative text-center shadow-md rounded-lg flex flex-col items-center justify-center gap-2">
         <XMarkIcon onClick={()=>{setContent('')}} className="size-4 cursor-pointer hover:border-1 hover:border-primary-300 absolute top-4 right-4 bg-primary-100 text-primary-400  rounded-full w-8 h-8" />
         <ShoppingCartIcon className="stroke-primary-300 text-white-pure size-16 " />
-        <h2 className="text-xl font-bold capitalize">{title}</h2>
+        <h2 className="text-xl font-bold capitalize">{title || 'Product'}</h2>
         <div className="flex items-center gap-2 flex-wrap justify-center">
           <span>{content}</span>
           {loading ? (
