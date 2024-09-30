@@ -27,11 +27,11 @@ const CartPage = () => {
     cart.reduce((acc, product) => ({ ...acc, [product.id]: product.quantity }), {})
   );
 
-  useEffect(() => {
-    setQuantities(
-      cart.reduce((acc, product) => ({ ...acc, [product.id]: product.quantity }), {})
-    );
-  }, [cart]);
+  // useEffect(() => {
+  //   setQuantities(
+  //     cart.reduce((acc, product) => ({ ...acc, [product.id]: product.quantity }), {})
+  //   );
+  // }, [cart]);
 
   const handleIncrement = (id) => {
     setQuantities((prevQuantities) => ({
