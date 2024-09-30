@@ -56,7 +56,7 @@ const CartPage = () => {
 
   const calculateSubtotal = () => {
     return cart
-      .reduce((acc, product) => acc + product.price * quantities[product.id], 0).toLocaleString();
+      .reduce((acc, product) => acc + product.price * quantities[product.id], 0);
   };
 
   const recentProducts = products.slice(0, 4);
