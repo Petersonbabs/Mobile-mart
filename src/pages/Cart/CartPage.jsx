@@ -9,7 +9,6 @@ import Modal from "../../components/layout/Modal";
 import { assests } from "../../assets/assets";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
-import { useProductContext } from "../../contexts/ProductContext";
 
 const CartPage = () => {
   const { message, messageTitle, products, token, getProducts, loadingCart } = useProductContext();
