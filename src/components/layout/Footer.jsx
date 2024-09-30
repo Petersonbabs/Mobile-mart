@@ -3,10 +3,8 @@ import { assests } from "../../assets/assets";
 const Footer = () => {
   return (
     <div className="footer py-16">
-      {/* wrapper */}
-      <div className="w-90vw  m-auto flex flex-col md:flex-row items-start mt-10 gap-16 max-w-6xl" >
-        {/* about */}
-        <div className=" ">
+      {/* about */}
+      <div className="px-8 mb-8">
           <div className="w-32">
             <img src={assests.Logo} alt="" width={"100%"} />
           </div>
@@ -15,9 +13,12 @@ const Footer = () => {
           </p>
         </div>
         {/* end of about */}
+      {/* wrapper */}
+      <div className="w-90vw  m-auto flex grid-col md:grid-row items-start mt-10 gap-16 max-w-6xl" >
+        
 
         {/* navigation */}
-        <div className="flex items-center justify-between w-full flex-col sm:flex-row gap-8 flex-wrap">
+        <div className="flex items-center justify-between w-full grid-cols-2 px-4 gap-8 flex-wrap">
           <div>
             <h2 className="text-xl text-primary-300 font-bold">Product</h2>
             <ul className="space-y-4 mt-6">
