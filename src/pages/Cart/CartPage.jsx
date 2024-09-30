@@ -1,23 +1,12 @@
-import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import ProductList from "../../components/layout/ProductList";
-import ShoppingCart from "./Components/ShoppingCart";
-import CartTotals from "./Components/CartTotals";
-import { useProductContext } from "../../contexts/ProductContext";
-import Modal from "../../components/layout/Modal";
-import { assests } from "../../assets/assets";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-
 const CartPage = () => {
   const { message, messageTitle, products, token, getProducts, loadingCart } = useProductContext();
   const [cart, setCart] = useState([]);
-  useEffect(()=>{
-    getProducts()
-  }, [token])
 
   useEffect(() => {
-    // Fetch cart data from local storage
+    getProducts();
+  }, [token]);
+
+  useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
   }, []);
@@ -55,19 +44,19 @@ const CartPage = () => {
   };
 
   const calculateSubtotal = () => {
-    return cart
-      .reduce((acc, product) => acc + product.price * quantities[product.id], 0);
+    return cart.reduce((acc, product) => acc + product.price * quantities[product.id], 0);
   };
 
-  const recentProducts = products.slice(0, 4);
-  const recommendedProducts = products.slice(5, 9);
+  // Ensure products exist before slicing
+  const recentProducts = products?.length > 0 ? products.slice(0, 4) : [];
+  const recommendedProducts = products?.length > 5 ? products.slice(5, 9) : [];
 
   return (
     <div>
       <Helmet>
         <title>MobileMart - Cart</title>
       </Helmet>
-      <Modal message={message} title={messageTitle} loading={loadingCart}/>
+      <Modal message={message} title={messageTitle} loading={loadingCart} />
       {cart.length > 0 ? (
         <div className="py-8">
           <div className="w-90vw max-w-6xl m-auto flex flex-col md:flex-row gap-8">
@@ -86,47 +75,43 @@ const CartPage = () => {
           </div>
         </div>
       ) : (
-        <div className=" p-6 rounded overflow-auto w-full flex flex-col items-center justify-center mt-9">
+        <div className="p-6 rounded overflow-auto w-full flex flex-col items-center justify-center mt-9">
           <h1 className="text-xl">You have nothing in your cart.</h1>
           <div className="w-44 h-fit p-0">
-            <img src={assests.EmptyCart} alt="" width={"100%"} />
+            <img src={assests.EmptyCart} alt="Empty Cart" width={"100%"} />
           </div>
-          <Link to={'/'} className="flex items-center justify-center gap-4 mt-4 bg-primary-300 text-white-pure py-3 w-90vw max-w-xl">
+          <Link to={"/"} className="flex items-center justify-center gap-4 mt-4 bg-primary-300 text-white-pure py-3 w-90vw max-w-xl">
             <span>Start Shopping</span>
-            <ShoppingCartIcon className="size-6 text-primary-300 stroke-white-pure"/>
+            <ShoppingCartIcon className="size-6 text-primary-300 stroke-white-pure" />
           </Link>
         </div>
       )}
+
       {/* Recently viewed */}
-      <div className="py-8">
-        <div className="w-90vw m-auto max-w-6xl">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-center md:text-start text-xl font-bold w-full md:w-fit">
-              Recently Viewed
-            </h3>
-            <Link className="hidden md:inline">View all</Link>
+      {recentProducts.length > 0 && (
+        <div className="py-8">
+          <div className="w-90vw m-auto max-w-6xl">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-center md:text-start text-xl font-bold w-full md:w-fit">Recently Viewed</h3>
+              <Link className="hidden md:inline">View all</Link>
+            </div>
+            <ProductList products={recentProducts} />
           </div>
-          {/* recent products */}
-          <ProductList products={recentProducts} />
-          {/* end of recent products */}
         </div>
-      </div>
-      {/* end of Recently viewed */}
-      {/* recommended products */}
-      <div className="mt-8">
-        <div className="w-90vw m-auto max-w-6xl">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-center md:text-start text-xl font-bold w-full md:w-fit">
-              Recommended for you
-            </h3>
-            <Link className="hidden md:inline">View all</Link>
+      )}
+
+      {/* Recommended products */}
+      {recommendedProducts.length > 0 && (
+        <div className="mt-8">
+          <div className="w-90vw m-auto max-w-6xl">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-center md:text-start text-xl font-bold w-full md:w-fit">Recommended for you</h3>
+              <Link className="hidden md:inline">View all</Link>
+            </div>
+            <ProductList products={recommendedProducts} />
           </div>
-          {/* recent products */}
-          <ProductList products={recommendedProducts} />
-          {/* end of recent products */}
         </div>
-      </div>
-      {/* end of recommended products */}
+      )}
     </div>
   );
 };
