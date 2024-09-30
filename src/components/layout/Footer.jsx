@@ -3,16 +3,7 @@ import { assests } from "../../assets/assets";
 const Footer = () => {
   return (
     <div className="footer py-16">
-      {/* about */}
-      <div className="px-8 mb-8">
-          <div className="w-32">
-            <img src={assests.Logo} alt="" width={"100%"} />
-          </div>
-          <p className="text-gray-primary">
-            © 2020 Mobile Mart. All rights reserved.
-          </p>
-        </div>
-        {/* end of about */}
+     
       {/* wrapper */}
       <div className="w-90vw  m-auto flex grid-col md:grid-row items-start mt-10 gap-16 max-w-6xl" >
         
@@ -66,6 +57,16 @@ const Footer = () => {
         {/* end of navigation */}
       </div>
       {/* end of wrapper */}
+       {/* about */}
+       <div className="px-8 mb-8">
+          <div className="w-32">
+            <img src={assests.Logo} alt="" width={"100%"} />
+          </div>
+          <p className="text-gray-primary">
+            © 2020 Mobile Mart. All rights reserved.
+          </p>
+        </div>
+        {/* end of about */}
     </div>
   );
 };
