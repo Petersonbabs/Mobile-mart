@@ -105,7 +105,7 @@ const MakePayment = ({ total }) => {
           />
           <input
             type="text"
-            value={`N${total}`}
+            value={`$${total}`}
             readOnly
             id="total"
             className="block rounded-b-sm w-full px-4 py-3 bg-gray-primary outline-none"

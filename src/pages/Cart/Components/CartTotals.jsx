@@ -13,7 +13,7 @@ const CartTotals = ({ cart, quantities, subtotal }) => {
       <ul className='space-y-6'>
         <li className='flex justify-between items-center'>
           <span style={{ color: '#999' }}>Sub-total({cart.length})</span>
-          <span>N{subtotal.toLocaleString()}</span>
+          <span>${subtotal.toLocaleString()}</span>
         </li>
         <li className='flex justify-between items-center'>
           <span style={{ color: '#999' }}>Shipping</span>
@@ -25,11 +25,11 @@ const CartTotals = ({ cart, quantities, subtotal }) => {
         </li>
         <li className='flex justify-between items-center'>
           <span style={{ color: '#999' }}>Tax</span>
-          <span>N{tax}</span>
+          <span>${tax}</span>
         </li>
         <li className='flex justify-between items-center py-6 border-t-1 border-gray-primary'>
           <span>Total</span>
-          <span>N{total}</span>
+          <span>${total}</span>
         </li>
       </ul>
       <Link to={'/checkout'} className='bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3'>

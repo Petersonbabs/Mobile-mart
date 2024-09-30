@@ -51,7 +51,7 @@ const OrderSummary = ({ setTotal }) => {
 
                 <div>
                   {quantity} X{" "}
-                  <span className="text-primary-300">N{price}</span>
+                  <span className="text-primary-300">${price}</span>
                 </div>
               </div>
             );
@@ -65,7 +65,7 @@ const OrderSummary = ({ setTotal }) => {
         <ul className="space-y-2">
           <li className="flex justify-between items-center">
             <span style={{ color: "#999" }}>Sub-total</span>
-            <span>N{subtotal}</span>
+            <span>${subtotal}</span>
           </li>
           <li className="flex justify-between items-center">
             <span style={{ color: "#999" }}>Shipping</span>
@@ -77,11 +77,11 @@ const OrderSummary = ({ setTotal }) => {
           </li>
           <li className="flex justify-between items-center">
             <span style={{ color: "#999" }}>Tax</span>
-            <span>N{tax}</span>
+            <span>${tax}</span>
           </li>
           <li className="flex justify-between items-center py-6 border-t-1 border-gray-primary">
             <span>Total</span>
-            <span className="font-bold">N{total}</span>
+            <span className="font-bold">${total}</span>
           </li>
         </ul>
 

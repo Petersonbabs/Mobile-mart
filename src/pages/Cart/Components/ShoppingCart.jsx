@@ -43,7 +43,7 @@ const ShoppingCart = ({
                   </div>
                   <div>
                     <p className="font-bold">{title}</p>
-                    <div>N{price}</div>
+                    <div>${price}</div>
                     <span>
                       Color:{" "}
                       <span style={{ color: "#999" }}>{product.color}</span>
