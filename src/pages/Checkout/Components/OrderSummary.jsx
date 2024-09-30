@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useProductContext } from "../../../contexts/ProductContext";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const OrderSummary = ({ setTotal }) => {
   const { cart } = useProductContext();
@@ -8,19 +9,25 @@ const OrderSummary = ({ setTotal }) => {
 
   const calculateSubtotal = () => {
     if (Array.isArray(cart) && cart.length > 0) {
-      return cart.reduce((sum, product) => sum + product.current_price[0].NGN[0] * product.quantity, 0);
+      return cart.reduce(
+        (sum, product) =>
+          sum + product.price * product.quantity,
+        0
+      );
     }
     return 0;
   };
 
   const subtotal = calculateSubtotal();
-  const tax = 40; 
-  const shipping = 0; 
+  const tax = 40;
+  const shipping = 0;
   const discount = 0;
   const total = subtotal + tax + shipping - discount;
 
-  // Pass total to parent component
-  setTotal(total);
+  useEffect(() => {
+    // Pass total to parent component
+    setTotal(total);
+  }, []);
 
   return (
     <div className="border border-gray-primary px-2 pb-4 rounded w-full md:w-2/4 h-fit hidden md:block">
@@ -28,8 +35,8 @@ const OrderSummary = ({ setTotal }) => {
       <div>
         {Array.isArray(cart) && cart.length > 0 ? (
           cart.map((product) => {
-            const { id, title, current_price, quantity, image } = product;
-            const price = current_price[0].NGN[0];
+            const { id, title, price, quantity, image } = product;
+           
             return (
               <div
                 key={id}
@@ -43,7 +50,8 @@ const OrderSummary = ({ setTotal }) => {
                 </div>
 
                 <div>
-                  {quantity} X <span className="text-primary-300">N{price}</span>
+                  {quantity} X{" "}
+                  <span className="text-primary-300">N{price}</span>
                 </div>
               </div>
             );
@@ -56,19 +64,19 @@ const OrderSummary = ({ setTotal }) => {
       <div className="border border-gray-primary px-2 py-4 rounded">
         <ul className="space-y-2">
           <li className="flex justify-between items-center">
-            <span style={{ color: '#999' }}>Sub-total</span>
+            <span style={{ color: "#999" }}>Sub-total</span>
             <span>N{subtotal}</span>
           </li>
           <li className="flex justify-between items-center">
-            <span style={{ color: '#999' }}>Shipping</span>
-            <span>{shipping === 0 ? 'Free' : `NN{shipping}`}</span>
+            <span style={{ color: "#999" }}>Shipping</span>
+            <span>{shipping === 0 ? "Free" : `NN{shipping}`}</span>
           </li>
           <li className="flex justify-between items-center">
-            <span style={{ color: '#999' }}>Discount</span>
+            <span style={{ color: "#999" }}>Discount</span>
             <span>{discount}</span>
           </li>
           <li className="flex justify-between items-center">
-            <span style={{ color: '#999' }}>Tax</span>
+            <span style={{ color: "#999" }}>Tax</span>
             <span>N{tax}</span>
           </li>
           <li className="flex justify-between items-center py-6 border-t-1 border-gray-primary">
@@ -77,7 +85,10 @@ const OrderSummary = ({ setTotal }) => {
           </li>
         </ul>
 
-        <Link to={'/'} className="bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3 rounded">
+        <Link
+          to={"/"}
+          className="bg-primary-300 text-white-pure flex items-center justify-center gap-4 hover:bg-primary-400 hover:gap-6 transition-all w-full py-3 rounded"
+        >
           <span>Continue Shopping</span>
           <ArrowRightIcon className="size-6" />
         </Link>
