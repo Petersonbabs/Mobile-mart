@@ -1,42 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductList from "../../../components/layout/ProductList";
-import PaginationBar from "../../../components/common/PaginationBar"
+import PaginationBar from "../../../components/common/PaginationBar";
 
 import { useProductContext } from "../../../contexts/ProductContext";
 
 const Categories = () => {
-  const {products, getProducts, token} = useProductContext()
-  useEffect(()=>{
-    getProducts()
-  }, [token])
+  const { products, getProducts, loading } = useProductContext();
 
-  if(!products){
-    return <h1>No product available</h1>
-  }
+  // Fetch products when component mounts
+  useEffect(() => {
+    getProducts();
+  }, []);
 
+  // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
-  
+
+  // Calculate current products for pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  
-
+  // Handle page change
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if(!products){
-    return <div class="spinner-grow block mx-auto size-20 bg-primary-300 my-16" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+  // Show loading spinner while products are being fetched
+  if (loading) {
+    return (
+      <div className="spinner-grow block mx-auto size-20 bg-primary-300 my-16" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
+  }
+
+  // Handle case when there are no products
+  if (!products || products?.length === 0) {
+    return <h1 className="text-center py-20">No products available</h1>;
   }
 
   return (
     <div id="categories" className="py-8">
       {/* Category wrapper */}
       <div className="w-90vw m-auto">
-        {/* text */}
+        {/* Text */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-center md:text-start text-3xl font-bold w-full md:w-fit">
@@ -60,11 +67,11 @@ const Categories = () => {
             )}
           </div>
         </div>
-        {/* end of text */}
+        {/* End of text */}
 
-        {/* products list */}
+        {/* Products list */}
         <ProductList products={currentProducts} />
-        {/* end of products list */}
+        {/* End of products list */}
 
         {/* Pagination */}
         <PaginationBar
@@ -73,7 +80,7 @@ const Categories = () => {
           paginate={paginate}
           currentPage={currentPage}
         />
-        {/* end of Pagination */}
+        {/* End of Pagination */}
       </div>
       {/* End of Category wrapper */}
     </div>

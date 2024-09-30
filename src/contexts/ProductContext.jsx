@@ -24,7 +24,7 @@ const ProductProdiver = ({ children }) => {
 
   useEffect(() => {
     getCartItems();
-    login();
+    // login();
   }, []);
 
   // LOGIN
@@ -54,7 +54,7 @@ const ProductProdiver = ({ children }) => {
 
     try {
       const response = await axios.get(
-        `${apiUrl}/products?organization_id=${organizationId}`,
+        `https://dummyjson.com/products/category/smartphones`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -64,8 +64,9 @@ const ProductProdiver = ({ children }) => {
       );
 
       const data = response.data;
+      console.log(data.products[0].images[0])
       if (response.status == 200) {
-        setProducts(data.items);
+        setProducts(data.products);
       }
     } catch (error) {
       console.log(`Erro occured at getProducts: ${error}`);

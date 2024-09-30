@@ -36,19 +36,18 @@ const ProductList = ({ products }) => {
   return (
     <div className="grid xsm:grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-8">
       {products?.map((product) => {
-        const { id, name, photos, current_price } = product;
-        const image = photos?.find(item => item.url)
-        const price = current_price[0]?.NGN[0].toLocaleString()
+        const { id, name, images, current_price } = product;
+        console.log(images[0])
         return (
           <div key={id} className="rounded border border-primary-300 p-4">
             <div className="w-full min-h-72 flex justify-center items-center object-contain">
-              <img src={`https://api.timbu.cloud/images/${image.url}`} alt="" className="w-8/12" />
+              <img src={images[0]} alt="" className="w-8/12" />
             </div>
             <h3 className="text-wrap break-words font-semibold tracking-wide capitalize my-2">
               {name}
             </h3>
             <div className="flex items-center justify-between flex-wrap">
-              <span className="text-lg">N{price}</span>
+              <span className="text-lg">${product.price}</span>
               <div className="flex items-center gap-2">
                 <button
                   className="px-2 py-1 bg-gray-300 rounded"
